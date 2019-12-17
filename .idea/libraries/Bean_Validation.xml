@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Bean Validation" type="BeanValidation">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/grails-2.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

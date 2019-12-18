@@ -19,12 +19,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Mojarra-2.4.0" level="project" />
-    <orderEntry type="library" name="PrimeFaces-6.1" level="project" />
-    <orderEntry type="library" name="IceFaces-3.1.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="JBoss 16.0.0.Final" level="application_server_libraries" />
-    <orderEntry type="library" name="JBoss Weld-2.0.3" level="project" />
-    <orderEntry type="library" name="org.grails:grails:2.0.1" level="project" />
-    <orderEntry type="library" name="Bean Validation" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="JBoss 18.0.1.Final" level="application_server_libraries" />
+    <orderEntry type="library" name="icefaces-ace" level="project" />
+    <orderEntry type="library" name="icefaces" level="project" />
+    <orderEntry type="library" name="javax.faces-2.4.0" level="project" />
+    <orderEntry type="library" name="postgresql-42.2.8" level="project" />
+    <orderEntry type="library" name="primefaces-7.0" level="project" />
   </component>
 </module>

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="web_archive">
-    <output-path>$PROJECT_DIR$/out/artifacts/web_archive</output-path>
+    <output-path>$PROJECT_DIR$/out/web_archive</output-path>
     <root id="archive" name="web_archive.war">
       <element id="artifact" artifact-name="web" />
     </root>

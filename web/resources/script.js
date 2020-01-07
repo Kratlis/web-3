@@ -1,4 +1,3 @@
-
 function drawCanvas(R){
     let canvas, ctx;
     try {
@@ -15,18 +14,28 @@ function drawCanvas(R){
     canvas.width = 300;
     ctx.fillStyle = '#3355ff';
     ctx.beginPath();
+
+    //Triangle
     ctx.moveTo(150, 90);
     ctx.lineTo(210, 150);
     ctx.lineTo(150, 150);
     ctx.fill();
+
+    //Quadrant
     ctx.arc(150, 150, 120, 0.5 * Math.PI, Math.PI, false);
+
+    //Rectangle
     ctx.lineTo(270, 150);
     ctx.lineTo(270, 270);
     ctx.lineTo(150, 270);
     ctx.fill();
-    ctx.strokeStyle = '#000000'; // меняем цвет рамки
-    ctx.strokeRect(150, 0, 0, 300);
-    ctx.strokeRect(0, 150, 300, 0);
+
+    //Lines
+    ctx.strokeStyle = '#000000'; // colour of the lines
+    ctx.strokeRect(150, 0, 0, 300); // y axis
+    ctx.strokeRect(0, 150, 300, 0); // x axis
+
+    //Strokes
     ctx.moveTo(150, 0);
     ctx.lineTo(146, 10);
     ctx.moveTo(150, 0);
@@ -52,14 +61,15 @@ function drawCanvas(R){
     ctx.moveTo(145, 270);
     ctx.lineTo(155, 270);
     ctx.stroke();
-    ctx.strokeText("-" + R / 2, 90, 140, 20);
-    ctx.strokeText("-" + R, 30, 140, 20);
+    //Signatures on the chart
+    ctx.strokeText(`-${R / 2}`, 90, 140, 20);
+    ctx.strokeText(`-${R}`, 30, 140, 20);
     ctx.strokeText(`${R / 2}`, 210, 140, 20);
     ctx.strokeText(R, 270, 140, 20);
     ctx.strokeText(R, 160, 33, 20);
-    ctx.strokeText(R / 2, 160, 93, 20);
-    ctx.strokeText("-" + R / 2, 160, 213, 20);
-    ctx.strokeText("-" + R, 160, 273, 20);
+    ctx.strokeText(`${R / 2}`, 160, 93, 20);
+    ctx.strokeText(`-${R / 2}`, 160, 213, 20);
+    ctx.strokeText(`-${R}`, 160, 273, 20);
     ctx.strokeText("x", 290, 140, 20);
     ctx.strokeText("y", 160, 10, 20);
     ctx.closePath();

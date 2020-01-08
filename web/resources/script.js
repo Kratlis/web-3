@@ -6,8 +6,7 @@ function drawCanvas(R){
     } catch (e) {
         alert("Ваш браузер не поддерживает элемент HTML5 Canvas.");
         document.getElementById("support").innerHTML =
-            "<br><br>" +
-            "<img src='area.jpg' alt='Область' width='420' height='380'>";
+            "<br><br><img src='area.jpg' alt='Область' width='420' height='380'>";
         return;
     }
     canvas.height = 300;
@@ -61,6 +60,7 @@ function drawCanvas(R){
     ctx.moveTo(145, 270);
     ctx.lineTo(155, 270);
     ctx.stroke();
+
     //Signatures on the chart
     if (R === undefined){
         ctx.strokeText("-R/2", 90, 140, 20);

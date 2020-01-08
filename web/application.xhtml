@@ -15,22 +15,71 @@
     <div>
         <h:form>
             X:
-            <h:selectBooleanCheckbox value="#{bean.x1}" label="X1">-4</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x2}">-3</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x3}">-2</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x4}">-1</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x5}">0</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x6}">1</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox value="#{bean.x7}">2</h:selectBooleanCheckbox>
+            <h:selectBooleanCheckbox id="x1" value="#{bean.x1}"/>
+            <h:outputLabel for="x1">
+                <h:outputText value="-4"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x2" value="#{bean.x2}"/>
+            <h:outputLabel for="x2">
+                <h:outputText value="-3"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x3" value="#{bean.x3}"/>
+            <h:outputLabel for="x3">
+                <h:outputText value="-2"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x4" value="#{bean.x4}"/>
+            <h:outputLabel for="x4">
+                <h:outputText value="-1"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x5" value="#{bean.x5}"/>
+            <h:outputLabel for="x5">
+                <h:outputText value="0"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x6" value="#{bean.x6}"/>
+            <h:outputLabel for="x6">
+                <h:outputText value="1"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="x7" value="#{bean.x7}"/>
+            <h:outputLabel for="x7">
+                <h:outputText value="2"/>
+            </h:outputLabel>
             Y:
-            <h:inputText id="y" ></h:inputText>
+            <h:inputText id="y"></h:inputText>
+            <h:outputLabel for="y">
+                <h:outputText value="YL"/>
+            </h:outputLabel>
             R:
-            <h:selectBooleanCheckbox>1</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox>2</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox>3</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox>4</h:selectBooleanCheckbox>
-            <h:selectBooleanCheckbox>5</h:selectBooleanCheckbox>
+            <h:selectBooleanCheckbox id="r1" value="#{bean.r1}"/>
+            <h:outputLabel for="r1">
+                <h:outputText value="1"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="r2" value="#{bean.r2}"/>
+            <h:outputLabel for="r2">
+                <h:outputText value="2"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="r3" value="#{bean.r3}"/>
+            <h:outputLabel for="r3">
+                <h:outputText value="3"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="r4" value="#{bean.r4}"/>
+            <h:outputLabel for="r4">
+                <h:outputText value="4"/>
+            </h:outputLabel>
+            <h:selectBooleanCheckbox id="r5" value="#{bean.r5}"/>
+            <h:outputLabel for="r5">
+                <h:outputText value="5"/>
+            </h:outputLabel>
+            <div>
+                <h:commandButton value="Проверить" action="#{bean.addPoint}">
+                    <f:ajax execute="@form" render="results"/>
+                </h:commandButton>
+            </div>
+        </h:form>
 
+        <h:outputText id="results" value="#{bean.x}"/>
+
+        <h:form>
+            <h:commandLink value="Назад" action="start"/>
         </h:form>
     </div>
 </h:body>

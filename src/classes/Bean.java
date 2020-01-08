@@ -1,9 +1,13 @@
 package classes;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class Bean {
+    //TODO: replace by points
+    private int x;
     private boolean x1;
     private boolean x2;
     private boolean x3;
@@ -11,8 +15,26 @@ public class Bean {
     private boolean x5;
     private boolean x6;
     private boolean x7;
+//TODO: Y
+    private boolean r1;
+    private boolean r2;
+    private boolean r3;
+    private boolean r4;
+    private boolean r5;
 
     public Bean() {
+    }
+
+//TODO: it must be point not a number; many x
+    public void addPoint(){
+        x = x1? -4 : x2? -3 : x3? -2 : x4? -1 : x5? 0 : x6? 1 : x7? 2 : 100000;
+        System.out.println(x);
+    }
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
     }
 
     public boolean isX1() {
@@ -69,5 +91,45 @@ public class Bean {
 
     public void setX7(boolean x7) {
         this.x7 = x7;
+    }
+
+    public boolean isR1() {
+        return r1;
+    }
+
+    public void setR1(boolean r1) {
+        this.r1 = r1;
+    }
+
+    public boolean isR2() {
+        return r2;
+    }
+
+    public void setR2(boolean r2) {
+        this.r2 = r2;
+    }
+
+    public boolean isR3() {
+        return r3;
+    }
+
+    public void setR3(boolean r3) {
+        this.r3 = r3;
+    }
+
+    public boolean isR4() {
+        return r4;
+    }
+
+    public void setR4(boolean r4) {
+        this.r4 = r4;
+    }
+
+    public boolean isR5() {
+        return r5;
+    }
+
+    public void setR5(boolean r5) {
+        this.r5 = r5;
     }
 }

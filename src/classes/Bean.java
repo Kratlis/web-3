@@ -18,14 +18,12 @@ public class Bean {
     private boolean x6;
     private boolean x7;
     private double y;
+    private int r;
     private boolean r1;
     private boolean r2;
     private boolean r3;
     private boolean r4;
     private boolean r5;
-
-    private double xCanvas;
-    private double yCanvas;
 
     public Bean() {
     }
@@ -113,6 +111,15 @@ public class Bean {
         this.y = y;
     }
 
+    public int getR() {
+        r = r1? 1 : r2? 2 : r3? 3 : r4? 4 : 5;
+        return r;
+    }
+
+    public void setR(int r) {
+        this.r = r;
+    }
+
     public boolean isR1() {
         return r1;
     }
@@ -151,21 +158,5 @@ public class Bean {
 
     public void setR5(boolean r5) {
         this.r5 = r5;
-    }
-
-    public double getxCanvas() {
-        return xCanvas;
-    }
-
-    public void setxCanvas(double xCanvas) {
-        this.xCanvas = xCanvas;
-    }
-
-    public double getyCanvas() {
-        return yCanvas;
-    }
-
-    public void setyCanvas(double yCanvas) {
-        this.yCanvas = yCanvas;
     }
 }

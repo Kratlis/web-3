@@ -22,19 +22,28 @@ public class Bean {
     private boolean r4;
     private boolean r5;
 
+    private double xCanvas;
+    private double yCanvas;
+
     public Bean() {
     }
 
-//TODO: it must be point not a number; many x
-    public void addPoint(){
-        x = x1? -4 : x2? -3 : x3? -2 : x4? -1 : x5? 0 : x6? 1 : x7? 2 : 100000;
+    //TODO: it must be point not a number; many x
+    public void addPoint() {
+        x = x1 ? -4 : x2 ? -3 : x3 ? -2 : x4 ? -1 : x5 ? 0 : x6 ? 1 : x7 ? 2 : 100000;
         System.out.println(x);
     }
+
     public int getX() {
         return x;
     }
+
     public void setX(int x) {
         this.x = x;
+    }
+
+    public void addPointFromCanvas() {
+
     }
 
     public boolean isX1() {
@@ -139,5 +148,21 @@ public class Bean {
 
     public void setR5(boolean r5) {
         this.r5 = r5;
+    }
+
+    public double getxCanvas() {
+        return xCanvas;
+    }
+
+    public void setxCanvas(double xCanvas) {
+        this.xCanvas = xCanvas;
+    }
+
+    public double getyCanvas() {
+        return yCanvas;
+    }
+
+    public void setyCanvas(double yCanvas) {
+        this.yCanvas = yCanvas;
     }
 }

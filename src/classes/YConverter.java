@@ -8,7 +8,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 @FacesConverter("yConverter")
-public class yConverter implements Converter {
+public class YConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

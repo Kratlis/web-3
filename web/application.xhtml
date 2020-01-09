@@ -11,11 +11,18 @@
 </h:head>
 <h:body onload="drawCanvas()">
     <div>
-        <canvas id="canvas"/>
+        <h:form id="plot">
+            <h:inputHidden id="xCanvas" value="#{bean.xCanvas}">
+            </h:inputHidden>
+            <h:inputHidden id="yCanvas" value="#{bean.yCanvas}">
+            </h:inputHidden>
+            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()">
+            </canvas>
+            <p:remoteCommand name="addPoint" action="#{bean.addPointFromCanvas}" update=":results"/>
+        </h:form>
     </div>
     <div>
-
-        <h:form>
+        <h:form id="form" onsubmit="return check();">
             X:
             <h:selectBooleanCheckbox id="x1" value="#{bean.x1}"/>
             <h:outputLabel for="x1">

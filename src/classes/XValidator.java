@@ -7,8 +7,8 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("rValidator")
-public class RValidator implements Validator {
+@FacesValidator("xValidator")
+public class XValidator implements Validator {
 
     private static int countTrue = 0;
     private static int countFalse = 0;
@@ -29,12 +29,8 @@ public class RValidator implements Validator {
         }
         if ((countTrue == 0) && ((countTrue + countFalse) == 5)) {
             countFalse = 0;
-            throw new ValidatorException(new FacesMessage("Выберете значение радиуса."));
-        } else if ((countTrue > 1) && ((countTrue + countFalse) == 5)) {
-            countTrue = 0;
-            countFalse = 0;
-            throw new ValidatorException(new FacesMessage("Выберете только одно значение радиуса"));
-        } else if ((countTrue == 1) && ((countTrue + countFalse) == 5)) {
+            throw new ValidatorException(new FacesMessage("Выберете значение координаты X."));
+        } else{
             countTrue = 0;
             countFalse = 0;
         }

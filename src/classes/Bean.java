@@ -28,7 +28,6 @@ public class Bean {
     public Bean() {
     }
 
-
     //TODO: it must be point not a number; many x
     public void addPoint() {
         x = x1 ? -4 : x2 ? -3 : x3 ? -2 : x4 ? -1 : x5 ? 0 : x6 ? 1 : x7 ? 2 : 100000;

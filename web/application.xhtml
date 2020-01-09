@@ -24,34 +24,57 @@
     <div>
         <h:form id="form" onsubmit="return check();">
             X:
-            <h:selectBooleanCheckbox id="x1" value="#{bean.x1}"/>
+            <h:selectBooleanCheckbox id="x1" value="#{bean.x1}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x1">
                 <h:outputText value="-4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x2" value="#{bean.x2}"/>
+            <h:selectBooleanCheckbox id="x2" value="#{bean.x2}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x2">
                 <h:outputText value="-3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x3" value="#{bean.x3}"/>
+            <h:selectBooleanCheckbox id="x3" value="#{bean.x3}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x3">
                 <h:outputText value="-2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x4" value="#{bean.x4}"/>
+            <h:selectBooleanCheckbox id="x4" value="#{bean.x4}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x4">
                 <h:outputText value="-1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x5" value="#{bean.x5}"/>
+            <h:selectBooleanCheckbox id="x5" value="#{bean.x5}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x5">
                 <h:outputText value="0"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x6" value="#{bean.x6}"/>
+            <h:selectBooleanCheckbox id="x6" value="#{bean.x6}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x6">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x7" value="#{bean.x7}"/>
+            <h:selectBooleanCheckbox id="x7" value="#{bean.x7}">
+                <f:validator validatorId="xValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="x7">
                 <h:outputText value="2"/>
             </h:outputLabel>
+
+            <h:message for="x1" style="color:red"/>
+            <h:message for="x2" style="color:red"/>
+            <h:message for="x3" style="color:red"/>
+            <h:message for="x4" style="color:red"/>
+            <h:message for="x5" style="color:red"/>
+            <h:message for="x6" style="color:red"/>
+            <h:message for="x7" style="color:red"/>
+
             Y:
             <h:inputText a:placeholder="[-5; 3]" id="y" value="#{bean.y}" maxlength="17" autocomplete="false">
                 <f:ajax execute="y" render="yError" event="keyup"/>
@@ -61,23 +84,33 @@
             <h:message id="yError" for="y" style="color:red"/>
 
             R:
-            <h:selectBooleanCheckbox id="r1" value="#{bean.r1}"/>
+            <h:selectBooleanCheckbox id="r1" value="#{bean.r1}">
+                <f:validator validatorId="rValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="r1">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r2" value="#{bean.r2}"/>
+            <h:selectBooleanCheckbox id="r2" value="#{bean.r2}">
+                <f:validator validatorId="rValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="r2">
                 <h:outputText value="2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r3" value="#{bean.r3}"/>
+            <h:selectBooleanCheckbox id="r3" value="#{bean.r3}">
+                <f:validator validatorId="rValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="r3">
                 <h:outputText value="3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r4" value="#{bean.r4}"/>
+            <h:selectBooleanCheckbox id="r4" value="#{bean.r4}">
+                <f:validator validatorId="rValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="r4">
                 <h:outputText value="4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r5" value="#{bean.r5}"/>
+            <h:selectBooleanCheckbox id="r5" value="#{bean.r5}">
+                <f:validator validatorId="rValidator"/>
+            </h:selectBooleanCheckbox>
             <h:outputLabel for="r5">
                 <h:outputText value="5"/>
             </h:outputLabel>

@@ -3,7 +3,7 @@ package classes;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+@ManagedBean(name = "bean")
 @SessionScoped
 public class Bean {
     //TODO: replace by points

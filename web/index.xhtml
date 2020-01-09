@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-   <h:outputScript name="startPage.js"> </h:outputScript>
+   <h:outputScript name="startPage.js"/>
 </h:head>
    <h:body>
       <header> Кубикова Екатерина и Зырянова Анастасия: 200041</header>
@@ -14,4 +14,8 @@
       </h:form>
       <label id="clock"/>
    </h:body>
+<h:outputScript>
+   clock();
+   setInterval(clock, 5000);
+</h:outputScript>
 </html>

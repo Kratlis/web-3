@@ -11,18 +11,18 @@ public class Point {
     private double y;
     private double R;
     private String time;
-    private boolean isInArea;
+    private boolean inArea;
 
     public Point() {
     }
 
-    Point(double x, double y, double r, Date date){
+    Point(double x, double y, double r, Date date) {
         this.x = x;
         this.y = y;
         this.R = r;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
         this.time = formatForDateNow.format(date);
-        this.isInArea = checkArea(x, y, r);
+        this.inArea = checkArea(x, y, r);
     }
 
     public double getX() {
@@ -42,7 +42,7 @@ public class Point {
     }
 
     public boolean isInArea() {
-        return isInArea;
+        return inArea;
     }
 
     @Override
@@ -50,12 +50,11 @@ public class Point {
         return "main.Point{";
     }
 
-    private static boolean checkArea(double x, double y, double R){
-        if ((x >= (-R/2)) && (y >= (-x - R/2)) && (x <= 0) && (y <= 0)){
+    private static boolean checkArea(double x, double y, double R) {
+        if ((x >= (-R / 2)) && (y >= -R) && (x <= 0) && (y <= (x + R / 2))) {
             return true;
         }
-        if ((x >= 0) && (x <= R/2) && (y >= - sqrt(pow((R/2),2) - pow(x, 2)))
-                && (y <= R)){
+        if ((x >= 0) && (x <= R) && (y >= -sqrt(pow(R, 2) - pow(x, 2))) && (y <= R)) {
             return true;
         }
         return false;

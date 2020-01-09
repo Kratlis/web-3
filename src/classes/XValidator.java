@@ -27,14 +27,15 @@ public class XValidator implements Validator {
         } else if (value.equals(false)) {
             countFalse++;
         }
-        if ((countTrue == 0) && ((countTrue + countFalse) == 5)) {
+        System.out.println(countTrue + " " + countFalse);
+        if ((countTrue == 0) && ((countTrue + countFalse) == 7)) {
             countFalse = 0;
+            System.out.println("No X");
             throw new ValidatorException(new FacesMessage("Выберете значение координаты X."));
-        } else{
+        } else if ((countTrue == 1) && ((countTrue + countFalse) == 5)){
             countTrue = 0;
             countFalse = 0;
         }
 
     }
-
 }

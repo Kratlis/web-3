@@ -4,46 +4,74 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Stack;
 
 @ManagedBean(name = "bean")
 @SessionScoped
 public class Bean {
-    //TODO: replace by points
-    private int x;
-    private boolean x1;
-    private boolean x2;
-    private boolean x3;
-    private boolean x4;
-    private boolean x5;
-    private boolean x6;
-    private boolean x7;
+
+    private LinkedList<Point> points = new LinkedList<>();
+    private boolean x1 = false;
+    private boolean x2 = false;
+    private boolean x3 = false;
+    private boolean x4 = false;
+    private boolean x5 = false;
+    private boolean x6 = false;
+    private boolean x7 = false;
     private double y;
     private int r;
-    private boolean r1;
-    private boolean r2;
-    private boolean r3;
-    private boolean r4;
-    private boolean r5;
+    private boolean r1 = false;
+    private boolean r2 = false;
+    private boolean r3 = false;
+    private boolean r4 = false;
+    private boolean r5 = false;
+
+    private boolean hit = false;
 
     public Bean() {
     }
 
     //TODO: it must be point not a number; many x
     public void addPoint() {
-        x = x1 ? -4 : x2 ? -3 : x3 ? -2 : x4 ? -1 : x5 ? 0 : x6 ? 1 : x7 ? 2 : 100000;
-        System.out.println(x);
-    }
+        if (x1) {
+            points.addFirst(new Point(-4, getY(), getR(), new Date()));
+        }
+        if (x2) {
+            points.addFirst(new Point(-3, getY(), getR(), new Date()));
+        }
+        if (x3) {
+            points.addFirst(new Point(-2, getY(), getR(), new Date()));
+        }
+        if (x4) {
+            points.addFirst(new Point(-1, getY(), getR(), new Date()));
+        }
+        if (x5) {
+            points.addFirst(new Point(0, getY(), getR(), new Date()));
+        }
+        if (x6) {
+            points.addFirst(new Point(1, getY(), getR(), new Date()));
+        }
+        if (x6) {
+            points.addFirst(new Point(2, getY(), getR(), new Date()));
+        }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
+        for (Point p : points) {
+            System.out.println(p.getX());
+        }
     }
 
     public void addPointFromCanvas() {
 
+    }
+
+    public LinkedList<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(LinkedList<Point> points) {
+        this.points = points;
     }
 
     public boolean isX1() {
@@ -111,7 +139,7 @@ public class Bean {
     }
 
     public int getR() {
-        r = r1? 1 : r2? 2 : r3? 3 : r4? 4 : 5;
+        r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
         return r;
     }
 
@@ -157,5 +185,13 @@ public class Bean {
 
     public void setR5(boolean r5) {
         this.r5 = r5;
+    }
+
+    public boolean isHit() {
+        return hit;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
     }
 }

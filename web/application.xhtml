@@ -12,13 +12,13 @@
 <h:body onload="drawCanvas()">
     <div>
         <h:form id="plot">
-            <h:inputHidden id="xCanvas" value="#{bean.xCanvas}">
+            <h:inputHidden id="xCanvas" value="#{canvasBean.x}">
             </h:inputHidden>
-            <h:inputHidden id="yCanvas" value="#{bean.yCanvas}">
+            <h:inputHidden id="yCanvas" value="#{canvasBean.y}">
             </h:inputHidden>
             <canvas id="canvas" width="300" height="300" onclick="clickOnArea()">
             </canvas>
-            <p:remoteCommand name="addPoint" action="#{bean.addPointFromCanvas}" update=":results"/>
+            <p:remoteCommand name="addPoint" action="#{canvasBean.addPoint}" update=":results"/>
         </h:form>
     </div>
     <div>
@@ -123,12 +123,34 @@
 
             <div>
                 <h:commandButton value="Проверить" action="#{bean.addPoint}">
-                    <f:ajax execute="@form" render="results"/>
+                    <f:ajax execute="@form" render="results @form"/>
                 </h:commandButton>
             </div>
         </h:form>
 
-        <h:outputText id="results" value="#{bean.x}, #{bean.y}"/>
+        <h:dataTable id="results"
+                     var="p"
+                     paginator="true"
+                     paginatorPosition="bottom"
+                     rows="10"
+                     value="#{bean.points}">
+
+            <h:column id="columnX" headerText="X">
+                <h:outputText id="xCell" value="#{p.x}"/>
+            </h:column>
+
+            <h:column id="columnY" headerText="Y">
+                <h:outputText id="yCell" value="#{p.y}"/>
+            </h:column>
+
+            <h:column id="columnR" headerText="R">
+                <h:outputText id="rCell" value="#{p.r}"/>
+            </h:column>
+
+            <h:column id="columnResult" headerText="RESULT">
+                <h:outputText id="resultCell" value="#{p.inArea}"/>
+            </h:column>
+        </h:dataTable>
 
         <h:form>
             <h:commandLink value="Назад" action="start"/>

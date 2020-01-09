@@ -7,15 +7,11 @@
 <h:head>
    <h:outputScript name="startPage.js"/>
 </h:head>
-   <h:body>
+   <h:body onload="clock();">
       <header> Кубикова Екатерина и Зырянова Анастасия: 200041</header>
       <h:form>
          <h:commandLink value="Перейти к графику" action="application"/>
       </h:form>
       <label id="clock"/>
    </h:body>
-<h:outputScript>
-   clock();
-   setInterval(clock, 5000);
-</h:outputScript>
 </html>

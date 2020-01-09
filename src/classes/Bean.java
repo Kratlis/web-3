@@ -15,7 +15,7 @@ public class Bean {
     private boolean x5;
     private boolean x6;
     private boolean x7;
-//TODO: Y
+    private double y;
     private boolean r1;
     private boolean r2;
     private boolean r3;
@@ -91,6 +91,14 @@ public class Bean {
 
     public void setX7(boolean x7) {
         this.x7 = x7;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public boolean isR1() {

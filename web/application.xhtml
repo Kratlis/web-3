@@ -4,15 +4,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-    <h:outputScript name="script.js"> </h:outputScript>
+    <h:outputScript name="script.js"/>
 </h:head>
 <h:body onload="drawCanvas()">
     <div>
         <canvas id="canvas"/>
     </div>
     <div>
+
         <h:form>
             X:
             <h:selectBooleanCheckbox id="x1" value="#{bean.x1}"/>
@@ -44,10 +46,13 @@
                 <h:outputText value="2"/>
             </h:outputLabel>
             Y:
-            <h:inputText id="y"></h:inputText>
-            <h:outputLabel for="y">
-                <h:outputText value="YL"/>
-            </h:outputLabel>
+            <h:inputText a:placeholder="[-5; 3]" id="y" value="#{bean.y}" maxlength="17" autocomplete="false">
+                <f:ajax execute="y" render="yError" event="keyup"/>
+                <f:validator validatorId="yValidator"/>
+                <f:converter converterId="yConverter"/>
+            </h:inputText>
+            <h:message id="yError" for="y" style="color:red"/>
+
             R:
             <h:selectBooleanCheckbox id="r1" value="#{bean.r1}"/>
             <h:outputLabel for="r1">
@@ -76,7 +81,7 @@
             </div>
         </h:form>
 
-        <h:outputText id="results" value="#{bean.x}"/>
+        <h:outputText id="results" value="#{bean.x}, #{bean.y}"/>
 
         <h:form>
             <h:commandLink value="Назад" action="start"/>

@@ -81,6 +81,13 @@
             <h:outputLabel for="r5">
                 <h:outputText value="5"/>
             </h:outputLabel>
+
+            <h:message for="r1" style="color:red"/>
+            <h:message for="r2" style="color:red"/>
+            <h:message for="r3" style="color:red"/>
+            <h:message for="r4" style="color:red"/>
+            <h:message for="r5" style="color:red"/>
+
             <div>
                 <h:commandButton value="Проверить" action="#{bean.addPoint}">
                     <f:ajax execute="@form" render="results"/>

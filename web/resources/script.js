@@ -40,14 +40,14 @@ function checkY() {
         warningYFormat.hidden = false;
         warningYValue.hidden = false;
         yValid = false;
-    } else if (!/^[-+]?([0-5]([.,]\d+)?)/.test(yField.value)){
+    } else if (!/^[-+]?([0-5]([.,]\d+)?)/.test(yField.value)) {
         yField.classList.add("warning-field");
         warningYValue.hidden = false;
         yValid = false;
-    } else{
+    } else {
         console.log(parseFloat(yField.value));
         let y = yField.value;
-        if (y < -5 || y > 5){
+        if (y < -5 || y > 5) {
             yField.classList.add("warning-field");
             warningYValue.hidden = false;
             yValid = false;
@@ -92,25 +92,25 @@ function clickOnArea() {
     request(x, y, r);
 }
 
-function drawPoint(context, x, y, r){
+function drawPoint(context, x, y, r) {
     if (isInArea(x, y, r)) {
         context.fillStyle = "red";
-    } else{
+    } else {
         context.fillStyle = "green";
     }
     context.beginPath();
     context.strokeStyle = "black";
-    context.arc(x/r * 120 + 150, 150 - y/r * 120, 3, 0*Math.PI, 2*Math.PI);
+    context.arc(x / r * 120 + 150, 150 - y / r * 120, 3, 0 * Math.PI, 2 * Math.PI);
     context.closePath();
     context.fill();
 }
 
-function isInArea(x, y, r){
-    if ((x >= (-r/2)) && (y >= (-x - r/2)) && (x <= 0) && (y <= 0)){
+function isInArea(x, y, r) {
+    if ((x >= (-r / 2)) && (y >= (-x - r / 2)) && (x <= 0) && (y <= 0)) {
         return true;
     }
-    if ((x >= 0) && (x <= r/2) && (y >= - Math.sqrt(Math.pow((r/2),2) - Math.pow(x, 2)))
-        && (y <= r)){
+    if ((x >= 0) && (x <= r / 2) && (y >= -Math.sqrt(Math.pow((r / 2), 2) - Math.pow(x, 2)))
+        && (y <= r)) {
         return true;
     }
     return false;
@@ -118,14 +118,14 @@ function isInArea(x, y, r){
 
 function request(x, y, r) {
     $.ajax({
-        type:'get',
-        url:'control',
-        data:{'x':x, 'y':y, 'r':r},
-        response:'text',
+        type: 'get',
+        url: 'control',
+        data: {'x': x, 'y': y, 'r': r},
+        response: 'text',
         error: function (message) {
             alert("Error: " + message);
         },
-        success:function (data) {   //возвращаемый результат от сервера
+        success: function (data) {   //возвращаемый результат от сервера
             let iframe = document.getElementById('response');
             iframe = iframe.contentWindow || iframe.document || iframe.contentDocument;
             iframe.document.open();
@@ -135,7 +135,7 @@ function request(x, y, r) {
     });
 }
 
-function drawCanvas(R){
+function drawCanvas(R) {
     let canvas, ctx;
     try {
         canvas = document.getElementById("canvas");
@@ -158,7 +158,7 @@ function drawCanvas(R){
     ctx.fill();
 
     //Quadrant
-    ctx.arc(150, 150, 120, 0, 0.5*Math.PI, false);
+    ctx.arc(150, 150, 120, 0, 0.5 * Math.PI, false);
 
     //Rectangle
     ctx.lineTo(90, 270);
@@ -199,7 +199,7 @@ function drawCanvas(R){
     ctx.stroke();
 
     //Signatures on the chart
-    if (R === undefined){
+    if (R === undefined) {
         ctx.strokeText("-R/2", 90, 140, 20);
         ctx.strokeText("-R", 30, 140, 20);
         ctx.strokeText("R/2", 210, 140, 20);

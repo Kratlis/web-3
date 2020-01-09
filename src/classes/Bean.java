@@ -1,7 +1,9 @@
 package classes;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "bean")
 @SessionScoped
@@ -27,6 +29,7 @@ public class Bean {
 
     public Bean() {
     }
+
 
     //TODO: it must be point not a number; many x
     public void addPoint() {

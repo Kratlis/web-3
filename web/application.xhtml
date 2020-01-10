@@ -9,7 +9,7 @@
 <h:head>
     <h:outputScript name="script.js"/>
 </h:head>
-<h:body onload="drawCanvas()">
+<h:body onload="drawCanvas(2)">
     <div>
         <h:form id="plot">
             <h:inputHidden id="xCanvas" value="#{bean.xCanvas}">
@@ -24,31 +24,31 @@
     <div>
         <h:form id="form" onsubmit="return check();">
             X:
-            <h:selectBooleanCheckbox id="x1" value="#{bean.x1}"/>
+            <h:selectBooleanCheckbox id="x1" name="x" value="#{bean.x1}"/>
             <h:outputLabel for="x1">
                 <h:outputText value="-4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x2" value="#{bean.x2}"/>
+            <h:selectBooleanCheckbox id="x2" name="x" value="#{bean.x2}"/>
             <h:outputLabel for="x2">
                 <h:outputText value="-3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x3" value="#{bean.x3}"/>
+            <h:selectBooleanCheckbox id="x3" name="x" value="#{bean.x3}"/>
             <h:outputLabel for="x3">
                 <h:outputText value="-2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x4" value="#{bean.x4}"/>
+            <h:selectBooleanCheckbox id="x4" name="x" value="#{bean.x4}"/>
             <h:outputLabel for="x4">
                 <h:outputText value="-1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x5" value="#{bean.x5}"/>
+            <h:selectBooleanCheckbox id="x5" name="x" value="#{bean.x5}"/>
             <h:outputLabel for="x5">
                 <h:outputText value="0"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x6" value="#{bean.x6}"/>
+            <h:selectBooleanCheckbox id="x6" name="x" value="#{bean.x6}"/>
             <h:outputLabel for="x6">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x7" value="#{bean.x7}"/>
+            <h:selectBooleanCheckbox id="x7" name="x" value="#{bean.x7}"/>
             <h:outputLabel for="x7">
                 <h:outputText value="2"/>
             </h:outputLabel>
@@ -61,23 +61,23 @@
             <h:message id="yError" for="y" style="color:red"/>
 
             R:
-            <h:selectBooleanCheckbox id="r1" value="#{bean.r1}"/>
+            <h:selectBooleanCheckbox id="r1" name="r" value="#{bean.r1}" disabled="false" onclick="checkIfRChecked()"/>
             <h:outputLabel for="r1">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r2" value="#{bean.r2}"/>
+            <h:selectBooleanCheckbox id="r2" name="r" value="#{bean.r2}" disabled="false" onchange="checkIfRChecked()"/>
             <h:outputLabel for="r2">
                 <h:outputText value="2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r3" value="#{bean.r3}"/>
+            <h:selectBooleanCheckbox id="r3" name="r" value="#{bean.r3}" disabled="false" onchange="checkIfRChecked()"/>
             <h:outputLabel for="r3">
                 <h:outputText value="3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r4" value="#{bean.r4}"/>
+            <h:selectBooleanCheckbox id="r4" name="r" value="#{bean.r4}" disabled="false" onchange="checkIfRChecked()"/>
             <h:outputLabel for="r4">
                 <h:outputText value="4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r5" value="#{bean.r5}"/>
+            <h:selectBooleanCheckbox id="r5" name="r" value="#{bean.r5}" disabled="false" onchange="checkIfRChecked()"/>
             <h:outputLabel for="r5">
                 <h:outputText value="5"/>
             </h:outputLabel>
@@ -95,4 +95,20 @@
         </h:form>
     </div>
 </h:body>
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+<script>
+    // function checkIfRChecked() {
+    //     $(document.getElementsByName("r")).live("click", function () {
+    //         if(document.getElementById("r1").checked){
+    //             document.getElementById("r2").disabled = "true";
+    //         }
+    //     })
+    // }
+</script>
 </html>
+
+

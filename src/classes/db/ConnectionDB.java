@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 
 public class ConnectionDB {
     private Connection connection;
-    private String url="jdbc:postgresql://localhost:5432/postgres";
-    private String name = "admin";
-    private String pass = "ad123";
+    private String url="jdbc:postgresql://localhost:5436/lab3";
+    private String name = "postgres";
+    private String pass = "123456";
 
     public Connection getConnection() {
         try {

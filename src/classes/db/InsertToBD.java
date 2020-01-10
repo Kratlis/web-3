@@ -15,12 +15,12 @@ public class InsertToBD {
     private void fillStatement(PreparedStatement statement, Bean bean) throws SQLException {
         double x = bean.getX();
         double y = bean.getY();
-        double r = bean.getR();
-        boolean hit = bean.isHit();
+        //double r = bean.getR();
+        //boolean hit = bean.isInArea();
 
         statement.setDouble(0, x);
         statement.setDouble(1, y);
-        statement.setDouble(2, r);
-        statement.setBoolean(3, hit);
+       // statement.setDouble(2, r);
+       // statement.setBoolean(3, hit);
     }
 }

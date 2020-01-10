@@ -1,139 +1,165 @@
-function check() {
-    return false;
-
-    warningX.hidden = true;
-    let yField = document.getElementById("y");
-    yField.classList.remove("warning-field");
-    warningYValue.hidden = true;
-    warningYFormat.hidden = true;
-    warningR.hidden = true;
-
-    checkX();
-    checkY();
-    checkR();
-    if (rValid && yValid && xValid) {
-        drawPoint(document.getElementById("canvas").getContext('2d'),
-            document.getElementById("x").value,
-            document.getElementById("y"),
-            document.getElementById("r"))
-    }
-    return (rValid && yValid && xValid);
-}
-
-function checkX() {
-    let x = document.getElementById("x").value;
-
-    if (x === 'no') {
-        xValid = false;
-        warningX.hidden = false;
+function getDataAndDrawPoint() {
+    let x;
+    let xArray;
+    let y;
+    let r;
+    let dataFromURL = getUrlVars();
+    if (dataFromURL > 0) {
+        [x, y, r] = getUrlVars();
     } else {
-        xValid = true;
-        warningX.hidden = true;
+        xArray = getXFromForm();
+        y = getYFromForm();
+        r = 2;
+    }
+    if (checkY(y)) {
+        if (xArray.length !== 0) {
+            for (let x of xArray) {
+                if (checkX(x)){
+                    drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
+                    saveSession(x, y, r);
+                    request(x, y, r);
+                    return true;
+                }
+            }
+        } else {
+            if (checkX(x)) {
+                drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
+                saveSession(x, y, r);
+                request(x, y, r);
+                return true;
+            }
+        }
+    } else {
+        return false;
     }
 }
 
-function checkY() {
-    let yField = document.getElementById("y");
-    // /[^0-9,.+-]/.test(yField.value)
-    if (yField.value === '') {
-        yField.classList.add("warning-field");
-        warningYFormat.hidden = false;
-        warningYValue.hidden = false;
-        yValid = false;
-    } else if (!/^[-+]?([0-5]([.,]\d+)?)/.test(yField.value)){
-        yField.classList.add("warning-field");
-        warningYValue.hidden = false;
-        yValid = false;
-    } else{
-        console.log(parseFloat(yField.value));
-        let y = yField.value;
-        if (y < -5 || y > 5){
-            yField.classList.add("warning-field");
-            warningYValue.hidden = false;
-            yValid = false;
-        } else {
-            yField.classList.remove("warning-field");
-            warningYFormat.hidden = true;
-            warningYValue.hidden = true;
-            yValid = true;
+function getYFromForm() {
+    let elY = document.getElementById('y');
+    elY.setCustomValidity("");
+    let y = elY.value.replace(",", ".");
+    return y;
+}
+
+function getXFromForm() {
+    let xArray = document.getElementsByName("x");
+    let xArrayChecked = [];
+    for (let elX of xArray) {
+        if (elX.checked) {
+            xArrayChecked.push(elX);
         }
     }
-}
-
-function checkR() {
-    let r = document.getElementById("r").value;
-
-    if (r === 'no') {
-        rValid = false;
-        warningR.hidden = false;
-    } else {
-        rValid = true;
-        warningR.hidden = true;
-    }
+    return xArrayChecked;
 }
 
 function clickOnArea() {
-    checkR();
-    if (!rValid) {
-        return;
-    }
     let canvas = document.getElementById("canvas");
     let boundRect = canvas.getBoundingClientRect();
     let left = boundRect.left;
     let top = boundRect.top;
 
     let event = window.event;
-    let xClick = event.clientX - left;
-    let yClick = event.clientY - top;
-    let r = document.getElementById("r").value;
-    let x = (xClick - 150) / 120 * r;
-    let y = (150 - yClick) / 120 * r;
+    let x = event.clientX - left;
+    let y = event.clientY - top;
+    let r = 2;
     drawPoint(canvas.getContext('2d'), x, y, r);
-    request(x, y, r);
+    request((x - 150) / 120 * r, (150 - y) / 120 * r, r);
 }
 
-function drawPoint(context, x, y, r){
-    if (isInArea(x, y, r)) {
+function drawPoint(context, x, y, r) {
+    if (!isInArea((x - 150) / 120 * r, (150 - y) / 120 * r, r)) {
         context.fillStyle = "red";
-    } else{
+    } else {
         context.fillStyle = "green";
     }
     context.beginPath();
     context.strokeStyle = "black";
-    context.arc(x/r * 120 + 150, 150 - y/r * 120, 3, 0*Math.PI, 2*Math.PI);
+    context.arc(x, y, 3, 0, 2 * Math.PI);
     context.closePath();
     context.fill();
 }
 
-function isInArea(x, y, r){
-    if ((x >= (-r/2)) && (y >= (-x - r/2)) && (x <= 0) && (y <= 0)){
-        return true;
+function isInArea(x, y, r) {
+    let isInArea = false;
+    if ((x >= 0 && y <= 0) && (x <= r && y >= -r)) {
+        isInArea = true;
+    } else if ((x <= 0 && y <= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= (Math.pow(r, 2)))) {
+        isInArea = true;
+    } else if ((y >= 0 && x >= 0) && (y <= (-x + r / 2))) {
+        isInArea = true;
     }
-    if ((x >= 0) && (x <= r/2) && (y >= - Math.sqrt(Math.pow((r/2),2) - Math.pow(x, 2)))
-        && (y <= r)){
-        return true;
-    }
-    return false;
+    return isInArea;
 }
 
 function request(x, y, r) {
+    saveSession(x, y, r);
     $.ajax({
-        type:'get',
-        url:'control',
-        data:{'x':x, 'y':y, 'r':r},
-        response:'text',
-        error: function (message) {
-            alert("Error: " + message);
-        },
-        success:function (data) {   //возвращаемый результат от сервера
-            let iframe = document.getElementById('response');
-            iframe = iframe.contentWindow || iframe.document || iframe.contentDocument;
-            iframe.document.open();
-            iframe.document.write(data);
-            iframe.document.close();
-        }
+        type: 'get',
+        url: 'control',
+        data: {x, y, r},
+        response: 'text'
+    }).done((data) => {
+        document.getElementById("response").innerHTML = data;
+    }).fail((error) => {
+        //alert("Error: " + error.message);
     });
+
 }
+
+function saveSession(x, y, r) {
+    let point = {
+        x,
+        y,
+        r,
+        date: new Date(),
+        isInArea: isInArea(x, y, r)
+    };
+    let points = [];
+    let pointsStr = sessionStorage.getItem("points");
+    if (pointsStr != null) {
+        points = JSON.parse(pointsStr);
+    }
+    points.push(point);
+    //addRow(x,y,r,point.date, point.isInArea);
+    sessionStorage.setItem("points", JSON.stringify(points));
+}
+
+
+function checkX(x) {
+    elX.setCustomValidity("");
+    let isXValid = true;
+    if (x === '') {
+        elX.setCustomValidity("Введите Х.");
+        isXValid = false;
+    } else if (/[^0-9,.+-]/.test(x)) {
+        elX.setCustomValidity("В поле Х должны быть введенны цифры.");
+        isXValid = false;
+    } else if (!/^(\+?(([0-4]([.,]\d+)?)|5([.,]0+)?))$|(-(([0-4]([.,]\d+)?)|(5([,.]0+)?)))$/.test(x)) {
+        elX.setCustomValidity("В Х введено значение, не входящие в интервал (-5; 5). ");
+        isXValid = false;
+    }
+    return isXValid;
+}
+
+function checkY(y) {
+    let elY = document.getElementById("x1");
+    elY.setCustomValidity("");
+    let isYValid = true;
+    if (!ySelected()) {
+        elY.setCustomValidity("Выберите Y.");
+        isYValid = false;
+    }
+    return isYValid;
+}
+
+function getUrlVars() {
+    let vars = {};
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 
 function drawCanvas(R){
     let canvas, ctx;

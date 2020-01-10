@@ -62,10 +62,6 @@ public class Bean {
         }
     }
 
-    public void addPointFromCanvas() {
-
-    }
-
     public LinkedList<Point> getPoints() {
         return points;
     }

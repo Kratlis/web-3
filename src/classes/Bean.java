@@ -1,18 +1,25 @@
 package classes;
 
+import classes.db.ConnectionDB;
+
+import javax.annotation.ManagedBean;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.servlet.http.HttpSession;
 import java.util.Stack;
 
-@ManagedBean(name = "bean")
-@SessionScoped
+@ManagedBean
+@RequestScoped
 public class Bean {
 
+    @ManagedProperty(value = "#{manager}")
+    private ManagerDB manager;
     private LinkedList<Point> points = new LinkedList<>();
     private boolean x1 = false;
     private boolean x2 = false;
@@ -29,16 +36,13 @@ public class Bean {
     private boolean r4 = false;
     private boolean r5 = false;
 
-    private boolean hit = false;
+    public Bean(){}
 
-    public Bean() {
-    }
-
-    //TODO: it must be point not a number; many x
-    public void addPoint() {
+    public void addPoints() {
         FacesContext fCtx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
         String sessionId = session.getId();
+        defineR();
 
         if (x1) {
             points.addFirst(new Point(-4, getY(), getR(), new Date(), sessionId));
@@ -62,9 +66,15 @@ public class Bean {
             points.addFirst(new Point(2, getY(), getR(), new Date(), sessionId));
         }
 
-        for (Point p : points) {
-            System.out.println(p.getX());
+        try {
+            manager.insertPointsToDB(points);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void defineR() {
+        r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
     }
 
     public LinkedList<Point> getPoints() {
@@ -75,6 +85,15 @@ public class Bean {
         this.points = points;
     }
 
+    public ManagerDB getManager() {
+        return manager;
+    }
+
+    public void setManager(ManagerDB manager) {
+        this.manager = manager;
+    }
+
+    // X getters&setters
     public boolean isX1() {
         return x1;
     }
@@ -131,6 +150,7 @@ public class Bean {
         this.x7 = x7;
     }
 
+    //Y getter&setter
     public double getY() {
         return y;
     }
@@ -140,7 +160,6 @@ public class Bean {
     }
 
     public int getR() {
-        r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
         return r;
     }
 
@@ -186,13 +205,5 @@ public class Bean {
 
     public void setR5(boolean r5) {
         this.r5 = r5;
-    }
-
-    public boolean isHit() {
-        return hit;
-    }
-
-    public void setHit(boolean hit) {
-        this.hit = hit;
     }
 }

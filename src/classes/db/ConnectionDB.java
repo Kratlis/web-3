@@ -14,13 +14,17 @@ public class ConnectionDB {
 
     public ConnectionDB() {
         try {
-            Class.forName("org.postgresql.Driver"); //Подключаем драйвер
-            System.out.println("Драйвер загружен!");//Выводим сообщение
-            connection = DriverManager.getConnection(url, name, pass);//Устанавливаем соединение
+            connect();
             System.out.println("Соединение успешно установлено! ");//Сообщение о подключении
         } catch (Exception e) {
             System.out.println("Cannot connect to database!");
         }
+    }
+
+    public void connect() throws ClassNotFoundException, SQLException {
+        Class.forName("org.postgresql.Driver"); //Подключаем драйвер
+        System.out.println("Драйвер загружен!");//Выводим сообщение
+        connection = DriverManager.getConnection(url, name, pass);//Устанавливаем соединение
     }
 
     public Connection getConnection() {

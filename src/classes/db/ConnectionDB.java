@@ -1,15 +1,18 @@
 package classes.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import classes.Point;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ConnectionDB {
     private Connection connection;
-    private String url="jdbc:postgresql://localhost:5436/lab3";
+    private String url = "jdbc:postgresql://localhost:5436/lab3";
     private String name = "postgres";
     private String pass = "123456";
 
-    public Connection getConnection() {
+    public ConnectionDB() {
         try {
             Class.forName("org.postgresql.Driver"); //Подключаем драйвер
             System.out.println("Драйвер загружен!");//Выводим сообщение
@@ -18,7 +21,9 @@ public class ConnectionDB {
         } catch (Exception e) {
             System.out.println("Cannot connect to database!");
         }
-        return connection;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
 }

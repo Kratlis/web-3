@@ -6,6 +6,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.servlet.http.HttpSession;
 import java.util.Stack;
 
 @ManagedBean(name = "bean")
@@ -35,26 +36,30 @@ public class Bean {
 
     //TODO: it must be point not a number; many x
     public void addPoint() {
+        FacesContext fCtx = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
+        String sessionId = session.getId();
+
         if (x1) {
-            points.addFirst(new Point(-4, getY(), getR(), new Date()));
+            points.addFirst(new Point(-4, getY(), getR(), new Date(), sessionId));
         }
         if (x2) {
-            points.addFirst(new Point(-3, getY(), getR(), new Date()));
+            points.addFirst(new Point(-3, getY(), getR(), new Date(), sessionId));
         }
         if (x3) {
-            points.addFirst(new Point(-2, getY(), getR(), new Date()));
+            points.addFirst(new Point(-2, getY(), getR(), new Date(), sessionId));
         }
         if (x4) {
-            points.addFirst(new Point(-1, getY(), getR(), new Date()));
+            points.addFirst(new Point(-1, getY(), getR(), new Date(), sessionId));
         }
         if (x5) {
-            points.addFirst(new Point(0, getY(), getR(), new Date()));
+            points.addFirst(new Point(0, getY(), getR(), new Date(), sessionId));
         }
         if (x6) {
-            points.addFirst(new Point(1, getY(), getR(), new Date()));
+            points.addFirst(new Point(1, getY(), getR(), new Date(), sessionId));
         }
         if (x6) {
-            points.addFirst(new Point(2, getY(), getR(), new Date()));
+            points.addFirst(new Point(2, getY(), getR(), new Date(), sessionId));
         }
 
         for (Point p : points) {

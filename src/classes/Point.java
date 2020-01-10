@@ -9,20 +9,39 @@ import static java.lang.Math.sqrt;
 public class Point {
     private double x;
     private double y;
-    private double R;
+    private int R;
     private String time;
     private boolean inArea;
+    private String sessionID;
 
     public Point() {
     }
 
-    Point(double x, double y, double r, Date date) {
+    Point(double x, double y, int r, String time, boolean inArea, String sessionID) {
+        this.x = x;
+        this.y = y;
+        R = r;
+        this.time = time;
+        this.inArea = inArea;
+        this.sessionID = sessionID;
+    }
+
+    Point(double x, double y, int r, Date date, String session) {
         this.x = x;
         this.y = y;
         this.R = r;
+        this.sessionID = session;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
         this.time = formatForDateNow.format(date);
         this.inArea = checkArea(x, y, r);
+    }
+
+    public Point(double x, double y, int r, String time, boolean inArea) {
+        this.x = x;
+        this.y = y;
+        R = r;
+        this.time = time;
+        this.inArea = inArea;
     }
 
     public double getX() {
@@ -33,7 +52,7 @@ public class Point {
         return y;
     }
 
-    public double getR() {
+    public int getR() {
         return R;
     }
 
@@ -43,6 +62,10 @@ public class Point {
 
     public boolean isInArea() {
         return inArea;
+    }
+
+    public String getSessionID() {
+        return sessionID;
     }
 
     @Override

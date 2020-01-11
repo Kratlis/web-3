@@ -1,4 +1,4 @@
-package classes;
+package classes.validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -7,8 +7,8 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("xValidator")
-public class XValidator implements Validator {
+@FacesValidator("rValidator")
+public class RValidator implements Validator {
 
     private static int countTrue = 0;
     private static int countFalse = 0;
@@ -27,15 +27,18 @@ public class XValidator implements Validator {
         } else if (value.equals(false)) {
             countFalse++;
         }
-        System.out.println(countTrue + " " + countFalse);
-        if ((countTrue == 0) && ((countTrue + countFalse) == 7)) {
+        if ((countTrue == 0) && ((countTrue + countFalse) == 5)) {
             countFalse = 0;
-            System.out.println("No X");
-            throw new ValidatorException(new FacesMessage("Выберете значение координаты X."));
-        } else if ((countTrue == 1) && ((countTrue + countFalse) == 7)){
+            throw new ValidatorException(new FacesMessage("Выберете значение радиуса."));
+        } else if ((countTrue > 1) && ((countTrue + countFalse) == 5)) {
+            countTrue = 0;
+            countFalse = 0;
+            throw new ValidatorException(new FacesMessage("Выберете только одно значение радиуса"));
+        } else if ((countTrue == 1) && ((countTrue + countFalse) == 5)) {
             countTrue = 0;
             countFalse = 0;
         }
 
     }
+
 }

@@ -2,17 +2,12 @@ package classes;
 
 import classes.db.ConnectionDB;
 
-import javax.annotation.ManagedBean;
-import javax.faces.annotation.ManagedProperty;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
-import javax.servlet.http.HttpSession;
-import java.util.Stack;
 
 @ManagedBean
 @RequestScoped
@@ -20,6 +15,7 @@ public class Bean {
 
     @ManagedProperty(value = "#{manager}")
     private ManagerDB manager;
+
     private LinkedList<Point> points = new LinkedList<>();
     private boolean x1 = false;
     private boolean x2 = false;
@@ -36,47 +32,45 @@ public class Bean {
     private boolean r4 = false;
     private boolean r5 = false;
 
-    public Bean(){}
+    public Bean() {
+    }
 
-    public void addPoints() {
-        FacesContext fCtx = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
-        String sessionId = session.getId();
+    public void executeForm() throws SQLException {
         defineR();
+        fillPointsList();
+        manager.insertPointsToDB(points);
+        points = manager.extractPointsFromDB();
+    }
 
+    private void fillPointsList() {
         if (x1) {
-            points.addFirst(new Point(-4, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(-4, y, r, new Date()));
         }
         if (x2) {
-            points.addFirst(new Point(-3, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(-3, y, r, new Date()));
         }
         if (x3) {
-            points.addFirst(new Point(-2, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(-2, y, r, new Date()));
         }
         if (x4) {
-            points.addFirst(new Point(-1, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(-1, y, r, new Date()));
         }
         if (x5) {
-            points.addFirst(new Point(0, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(0, y, r, new Date()));
         }
         if (x6) {
-            points.addFirst(new Point(1, getY(), getR(), new Date(), sessionId));
+            points.addFirst(new Point(1, y, r, new Date()));
         }
         if (x6) {
-            points.addFirst(new Point(2, getY(), getR(), new Date(), sessionId));
-        }
-
-        try {
-            manager.insertPointsToDB(points);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            points.addFirst(new Point(2, y, r, new Date()));
         }
     }
 
-    public void defineR() {
+    private void defineR() {
         r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
     }
 
+    // Getters & Setters
     public LinkedList<Point> getPoints() {
         return points;
     }
@@ -93,7 +87,7 @@ public class Bean {
         this.manager = manager;
     }
 
-    // X getters&setters
+    // X selectBooleanCheckbox getters&setters
     public boolean isX1() {
         return x1;
     }
@@ -163,10 +157,7 @@ public class Bean {
         return r;
     }
 
-    public void setR(int r) {
-        this.r = r;
-    }
-
+    //R selectBooleanCheckbox getters&setters
     public boolean isR1() {
         return r1;
     }

@@ -17,6 +17,7 @@ public class Point {
     public Point() {
     }
 
+/*
     Point(double x, double y, int r, String time, boolean inArea, String sessionID) {
         this.x = x;
         this.y = y;
@@ -25,12 +26,12 @@ public class Point {
         this.inArea = inArea;
         this.sessionID = sessionID;
     }
+*/
 
-    Point(double x, double y, int r, Date date, String session) {
+    Point(double x, double y, int r, Date date) {
         this.x = x;
         this.y = y;
         this.R = r;
-        this.sessionID = session;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
         this.time = formatForDateNow.format(date);
         this.inArea = checkArea(x, y, r);
@@ -66,6 +67,10 @@ public class Point {
 
     public String getSessionID() {
         return sessionID;
+    }
+
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
     }
 
     @Override

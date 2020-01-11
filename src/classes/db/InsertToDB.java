@@ -15,7 +15,7 @@ public class InsertToDB {
 
     public void insertPoint(Point point) throws SQLException {
         PreparedStatement stat = connection.prepareStatement(
-                "insert into points.(abscissa, ordinate, radius, inarea, time, sessionid) values (?, ?, ?, ?, ?, ?)");
+                "insert into points(abscissa, ordinate, radius, in_area, time, session_id) values (?, ?, ?, ?, ?, ?)");
         fillStatement(stat, point);
         stat.executeUpdate();
         stat.close();

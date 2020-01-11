@@ -24,7 +24,7 @@ public class Bean {
     private boolean x5 = false;
     private boolean x6 = false;
     private boolean x7 = false;
-    private double y;
+    private Double y;
     private int r;
     private boolean r1 = false;
     private boolean r2 = false;
@@ -145,7 +145,7 @@ public class Bean {
     }
 
     //Y getter&setter
-    public double getY() {
+    public Double getY() {
         return y;
     }
 

@@ -285,10 +285,10 @@ function drawCanvas(R){
     ctx.strokeText(`-${R}`, 160, 273, 20);
     ctx.strokeText("x", 290, 140, 20);
     ctx.strokeText("y", 160, 10, 20);
-
+    initPoints(R);
     ctx.closePath();
 
-    initPoints(R);
+
 }
 
 

@@ -207,7 +207,7 @@ function initPoints(r) {
     if (pointsStr != null) {
         points = JSON.parse(pointsStr);
         for (let point of points) {
-            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, getRFromForm());
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, sessionStorage.getItem("radiusValue"));
         }
     }
 }

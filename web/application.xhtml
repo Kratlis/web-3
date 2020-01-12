@@ -14,7 +14,7 @@
 </h:head>
 <h:body onload="drawCanvas(2)">
 
-    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" />
+    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" update=":results"/>
     <div>
             <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
     </div>

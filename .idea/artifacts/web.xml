@@ -8,8 +8,6 @@
           <element id="module-output" name="web3" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="icefaces-ace" />
-          <element id="library" level="project" name="icefaces" />
           <element id="library" level="project" name="javax.faces-2.4.0" />
           <element id="library" level="project" name="postgresql-42.2.8" />
           <element id="library" level="project" name="primefaces-7.0" />

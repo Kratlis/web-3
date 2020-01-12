@@ -36,9 +36,13 @@ public class Bean {
     }
 
     public void executeForm() throws SQLException {
-        defineR();
-        fillPointsList();
-        manager.insertPointsToDB(points);
+        if (rChosen()){
+            System.out.println( "XXXX: " + x1 + " " + x2 + " " + x3 + " " + x4 + " " + x5 + " " + x6 + " " + x7);
+            defineR();
+            fillPointsList();
+            System.out.println(points);
+            manager.insertPointsToDB(points);
+        }
         points = manager.extractPointsFromDB();
     }
 
@@ -61,7 +65,7 @@ public class Bean {
         if (x6) {
             points.addFirst(new Point(1, y, r, new Date()));
         }
-        if (x6) {
+        if (x7) {
             points.addFirst(new Point(2, y, r, new Date()));
         }
     }
@@ -69,6 +73,10 @@ public class Bean {
 
     private void defineR() {
         r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
+    }
+
+    private boolean rChosen(){
+        return r1 || r2 || r3 || r4 || r5;
     }
 
     // Getters & Setters

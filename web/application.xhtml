@@ -124,7 +124,8 @@
 
             <div>
                 <h:commandButton value="Проверить" action="#{bean.executeForm}">
-                    <f:ajax execute="@form" render="results @form"/>
+                    <f:ajax execute="@form" render="@form"/>
+                    <f:ajax immediate="true" render="results"/>
                 </h:commandButton>
             </div>
         </h:form>

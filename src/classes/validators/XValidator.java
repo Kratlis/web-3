@@ -32,7 +32,7 @@ public class XValidator implements Validator {
             countFalse = 0;
             System.out.println("No X");
             throw new ValidatorException(new FacesMessage("Выберете значение координаты X."));
-        } else if ((countTrue == 1) && ((countTrue + countFalse) == 7)){
+        } else if ((countTrue + countFalse) == 7){
             countTrue = 0;
             countFalse = 0;
         }

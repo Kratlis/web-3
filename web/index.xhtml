@@ -3,13 +3,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-   <h:outputScript name="startPage.js"/>
+    <h:outputScript name="startPage.js"/>
+    <h:outputStylesheet name="style.css" library="css"/>
 </h:head>
-   <h:body onload="clock();">
-      <header> Кубикова Екатерина и Зырянова Анастасия: 200041</header>
-      <h:form>
-         <h:commandLink value="Перейти к графику" action="application"/>
-      </h:form>
-      <label id="clock"/>
-   </h:body>
+<h:body onload="clock();">
+    <header style="color: grey">
+        <div>
+            <div class="child">
+                <p>Кубикова Екатерина и Зырянова Анастасия</p>
+                <p>Вариант: 200041</p>
+                <div>
+                    <h:outputLink value="https://github.com/Nastennn/web-3" styleClass="link">
+                        <h:graphicImage name="pictures/github.png" height="50" width="50"/>
+                    </h:outputLink>
+                </div>
+            </div>
+            <div class="child" align="right">
+                <div id="clock"></div>
+            </div>
+        </div>
+    </header>
+    <div align="center">
+        <h:graphicImage value="resources/pictures/pic.png" height="300" width="480"
+                        alt="Примите, пожалуйста, лабу"/>
+    </div>
+    <h:form>
+        <h:link value="Принять лабу" action="application"/>
+    </h:form>
+</h:body>
 </html>

@@ -289,7 +289,9 @@ function drawCanvas(R){
 
 function updateRadius() {
     let previousR = sessionStorage.getItem("radiusValue");
-    changeRadius(getRadiusElementByValue(previousR));
+    if (previousR != undefined) {
+        changeRadius(getRadiusElementByValue(previousR));
+    }
 }
 
 function changeRadius(clickedElement) {

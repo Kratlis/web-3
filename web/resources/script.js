@@ -198,13 +198,13 @@ function saveSession(x, y, r) {
     sessionStorage.setItem("points", JSON.stringify(points));
 }
 
-function initPoints() {
+function initPoints(r) {
     let points = [];
     let pointsStr = sessionStorage.getItem("points");
     if (pointsStr != null) {
         points = JSON.parse(pointsStr);
         for (let point of points) {
-            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, rad);
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, r);
         }
     }
 }
@@ -288,7 +288,7 @@ function drawCanvas(R){
 
     ctx.closePath();
 
-    initPoints();
+    initPoints(R);
 }
 
 

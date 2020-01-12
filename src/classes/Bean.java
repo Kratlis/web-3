@@ -16,7 +16,7 @@ public class Bean {
     @ManagedProperty(value = "#{manager}")
     private ManagerDB manager;
 
-    public LinkedList<Point> points = new LinkedList<>();
+    private LinkedList<Point> points = new LinkedList<>();
     private boolean x1 = false;
     private boolean x2 = false;
     private boolean x3 = false;
@@ -78,7 +78,8 @@ public class Bean {
     }
 
     // Getters & Setters
-    public LinkedList<Point> getPoints() {
+    public LinkedList<Point> getPoints() throws SQLException {
+        points = manager.extractPointsFromDB();
         return points;
     }
 

@@ -19,7 +19,7 @@ public class YConverter implements Converter {
         }
 
         try {
-            return Double.parseDouble(value.trim().replace(",", "."));
+            return new Double(value.trim().replace(",", "."));
         } catch (NumberFormatException ex) {
             throw new ConverterException(new FacesMessage("Координата Y должна быть числом."));
         }

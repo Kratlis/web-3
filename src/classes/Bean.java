@@ -149,7 +149,7 @@ public class Bean {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(Double y) {
         this.y = y;
     }
 

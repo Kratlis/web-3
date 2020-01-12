@@ -12,7 +12,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 </h:head>
-<h:body onload="drawCanvas(2)">
+<h:body>
 
     <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" update=":results"/>
     <div>
@@ -20,7 +20,6 @@
     </div>
     <div>
         <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
-            <script type="text/javascript">getDataAndDrawPoint()</script>
             X:
             <h:selectBooleanCheckbox id="x1" class="x" value="#{bean.x1}">
                 <f:validator validatorId="xValidator"/>

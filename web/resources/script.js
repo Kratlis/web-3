@@ -76,7 +76,7 @@ function getRadiusElementByValue(rValue) {
 }
 
 function checkY(y) {
-    let elY = document.getElementById("y")
+    let elY = document.getElementById("y");
     elY.setCustomValidity("");
     let isYValid = true;
     if (y === '') {
@@ -201,7 +201,7 @@ function saveSession(x, y, r) {
     sessionStorage.setItem("points", JSON.stringify(points));
 }
 
-function initPoints(r) {
+function initPoints(R) {
     let points = [];
     let pointsStr = sessionStorage.getItem("points");
     if (pointsStr != null) {
@@ -212,7 +212,7 @@ function initPoints(r) {
     }
 }
 
-function drawCanvas(R){
+function drawCanvas(R) {
     let canvas, ctx;
     try {
         canvas = document.getElementById("canvas");
@@ -291,8 +291,14 @@ function drawCanvas(R){
 
 function updateRadius() {
     let previousR = sessionStorage.getItem("radiusValue");
-    if (previousR != undefined) {
-        changeRadius(getRadiusElementByValue(previousR));
+    if (previousR != null) {
+        let element = getRadiusElementByValue(previousR);
+        element.checked = true;
+        changeRadius(element);
+    } else {
+        let element = getRadiusElementByValue(2);
+        element.checked = true;
+        changeRadius(element);
     }
 }
 

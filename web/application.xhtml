@@ -19,8 +19,11 @@
             <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
     </div>
     <div>
+        <h:graphicImage  value="resources/pictures/-EmLiFwftbk.jpg" height="300" width="480"
+                         alt="внутренний мир" style="top:10px; left:500px; float: right; position: fixed;"/>
         <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
             <script type="text/javascript">getDataAndDrawPoint()</script>
+            <div>
             X:
             <h:selectBooleanCheckbox id="x1" class="x" value="#{bean.x1}">
                 <f:validator validatorId="xValidator"/>
@@ -72,7 +75,8 @@
             <h:message for="x5" style="color:red"/>
             <h:message for="x6" style="color:red"/>
             <h:message for="x7" style="color:red"/>
-
+            </div>
+            <div>
             Y:
             <h:inputText a:placeholder="[-5; 3]" id="y" value="#{bean.y}" maxlength="17" autocomplete="false">
                 <f:ajax execute="y" render="yError" event="keyup"/>
@@ -80,7 +84,8 @@
                 <f:converter converterId="yConverter"/>
             </h:inputText>
             <h:message id="yError" for="y" style="color:red"/>
-
+            </div>
+            <div>
             R:
             <h:selectBooleanCheckbox id="r1" class="r" value="#{bean.r1}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
@@ -118,7 +123,7 @@
             <h:message for="r3" style="color:red"/>
             <h:message for="r4" style="color:red"/>
             <h:message for="r5" style="color:red"/>
-
+            </div>
             <div>
                 <h:commandButton value="Проверить" action="#{bean.executeForm}" onclick="getDataAndDrawPoint()">
                     <f:ajax execute="@form" render="@form"/>
@@ -128,25 +133,26 @@
         </h:form>
 
 
+
         <div style="height: 200px; overflow: auto;">
             <h:dataTable id="results"
                          var="p"
                          value="#{bean.points}">
 
-                <h:column id="columnX" headerText="X">
-                    <h:outputText id="xCell" value="#{p.x}"/>
+                <h:column id="columnX" headerText="X" >
+                    <h:outputText id="xCell" value="#{p.x}" />
                 </h:column>
 
-                <h:column id="columnY" headerText="Y">
-                    <h:outputText id="yCell" value="#{p.y}"/>
+                <h:column id="columnY" headerText="Y" >
+                    <h:outputText id="yCell" value="#{p.y}" />
                 </h:column>
 
-                <h:column id="columnR" headerText="R">
-                    <h:outputText id="rCell" value="#{p.r}"/>
+                <h:column id="columnR" headerText="R" >
+                    <h:outputText id="rCell" value="#{p.r}" />
                 </h:column>
 
-                <h:column id="columnResult" headerText="RESULT">
-                    <h:outputText id="resultCell" value="#{p.inArea}"/>
+                <h:column id="columnResult" headerText="RESULT" >
+                    <h:outputText id="resultCell" value="#{p.inArea}" />
                 </h:column>
             </h:dataTable>
         </div>

@@ -21,7 +21,7 @@ public class ExtractInfoFromDB {
             Point point = createPoint(pointFinder);
             list.addFirst(point);
         }
-        System.out.println("List is ready");
+        System.out.println("Points are extracted from db.");
         return list;
     }
 

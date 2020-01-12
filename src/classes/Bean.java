@@ -36,9 +36,11 @@ public class Bean {
     }
 
     public void executeForm() throws SQLException {
-        defineR();
-        fillPointsList();
-        manager.insertPointsToDB(points);
+        if (rChosen()){
+            defineR();
+            fillPointsList();
+            manager.insertPointsToDB(points);
+        }
         points = manager.extractPointsFromDB();
     }
 
@@ -78,6 +80,10 @@ public class Bean {
 
     private void defineR() {
         r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
+    }
+
+    private boolean rChosen(){
+        return r1 || r2 || r3 || r4 || r5;
     }
 
     // Getters & Setters

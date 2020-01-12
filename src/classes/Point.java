@@ -75,7 +75,7 @@ public class Point {
 
     @Override
     public String toString() {
-        return "main.Point{";
+        return "main.Point{" + x + " " + y + " " + R ;
     }
 
     private static boolean checkArea(double x, double y, double R) {

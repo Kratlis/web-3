@@ -21,8 +21,7 @@
             </h:inputHidden>
             <h:inputHidden id="yCanvas" value="#{canvasBean.y}">
             </h:inputHidden>
-            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()">
-            </canvas>
+            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
             <p:remoteCommand name="addPoint" action="#{canvasBean.addPoint}" update=":results"/>
         </h:form>
     </div>

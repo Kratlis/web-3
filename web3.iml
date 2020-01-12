@@ -22,7 +22,7 @@
     <orderEntry type="library" name="javax.faces-2.4.0" level="project" />
     <orderEntry type="library" name="postgresql-42.2.8" level="project" />
     <orderEntry type="library" name="primefaces-7.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="JBoss 16.0.0.Final" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="JBoss 18.0.1.Final" level="application_server_libraries" />
     <orderEntry type="library" name="com.googlecode.wicket-jquery-ui:jquery-ui-core:1.1" level="project" />
   </component>
 </module>

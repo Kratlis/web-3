@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="icefaces">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/icefaces.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

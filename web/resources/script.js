@@ -70,6 +70,11 @@ function getRFromForm() {
     return r;
 }
 
+function getRadiusElementByValue(rValue) {
+    let rArray = document.getElementsByClassName("r");
+    return rArray[rValue - 1];
+}
+
 function checkY(y) {
     let elY = document.getElementById("y")
     elY.setCustomValidity("");
@@ -118,7 +123,6 @@ function getUrlVars() {
     return vars;
 }
 
-
 function request(x, y, r) {
     saveSession(x, y, r);
     passToJSFManagedBean(
@@ -140,7 +144,6 @@ function request(x, y, r) {
 }
 
 // Обработка данных при клике на график
-
 function clickOnArea() {
     let canvas = document.getElementById("canvas");
     let boundRect = canvas.getBoundingClientRect();
@@ -180,7 +183,6 @@ function isInArea(x, y, r) {
     return isInArea;
 }
 
-
 function saveSession(x, y, r) {
     let point = {
         x,
@@ -210,8 +212,7 @@ function initPoints(r) {
     }
 }
 
-
-function drawCanvas(R) {
+function drawCanvas(R){
     let canvas, ctx;
     try {
         canvas = document.getElementById("canvas");
@@ -286,10 +287,12 @@ function drawCanvas(R) {
     ctx.strokeText("y", 160, 10, 20);
     initPoints(R);
     ctx.closePath();
-
-
 }
 
+function updateRadius() {
+    let previousR = sessionStorage.getItem("radiusValue");
+    changeRadius(getRadiusElementByValue(previousR));
+}
 
 function changeRadius(clickedElement) {
     const rElems = document.getElementsByClassName("r");
@@ -297,7 +300,6 @@ function changeRadius(clickedElement) {
         if (clickedElement.checked && !el.checked) {
             el.disabled = true;
         }
-
         if (!clickedElement.checked) {
             el.disabled = false;
         }
@@ -305,6 +307,7 @@ function changeRadius(clickedElement) {
 
     if (clickedElement.checked) {
         drawCanvas(getRFromForm());
+        sessionStorage.setItem("radiusValue", getRFromForm());
     }
 }
 
@@ -324,5 +327,4 @@ function renderRadius() {
             }
         }
     }
-
 }

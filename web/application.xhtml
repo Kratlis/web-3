@@ -16,11 +16,7 @@
 
     <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" />
     <div>
-        <h:form id="plot">
-            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()">
-            </canvas>
-            <p:remoteCommand name="addPoint" action="#{canvasBean.addPoint}" update=":results"/>
-        </h:form>
+            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
     </div>
     <div>
         <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
@@ -115,7 +111,7 @@
             <h:outputLabel for="r5">
                 <h:outputText value="5"/>
             </h:outputLabel>
-
+            <script type="text/javascript">updateRadius()</script>
             <h:message for="r1" style="color:red"/>
             <h:message for="r2" style="color:red"/>
             <h:message for="r3" style="color:red"/>

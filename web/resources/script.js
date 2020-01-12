@@ -1,36 +1,40 @@
+// Обработка данных с формы или из URL
 function getDataAndDrawPoint() {
     let x;
-    let xArray;
+    let xArray = [];
     let y;
     let r;
     let dataFromURL = getUrlVars();
     if (dataFromURL > 0) {
-        [x, y, r] = getUrlVars();
+        [x, y, r] = dataFromURL;
+
+        if (!checkY(y)) {
+            return false;
+        }
+
+        drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
+        //saveSession(x, y, r);
+        request(x, y, r);
+        return true;
     } else {
         xArray = getXFromForm();
         y = getYFromForm();
-        r = 2;
-    }
-    if (checkY(y)) {
-        if (xArray.length !== 0) {
-            for (let x of xArray) {
-                if (checkX(x)){
-                    drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
-                    saveSession(x, y, r);
-                    request(x, y, r);
-                    return true;
-                }
-            }
-        } else {
-            if (checkX(x)) {
-                drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
-                saveSession(x, y, r);
-                request(x, y, r);
-                return true;
-            }
+        r = getRFromForm();
+
+        if (!checkY(y)) {
+            return false;
         }
-    } else {
-        return false;
+
+        if (!checkX()) {
+            return false;
+        }
+
+        for (let x of xArray) {
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
+            saveSession(x, y, r);
+            //request(x, y, r);
+            return true;
+        }
     }
 }
 
@@ -42,7 +46,7 @@ function getYFromForm() {
 }
 
 function getXFromForm() {
-    let xArray = document.getElementsByName("x");
+    let xArray = document.getElementsByClassName("x");
     let xArrayChecked = [];
     for (let elX of xArray) {
         if (elX.checked) {
@@ -51,6 +55,101 @@ function getXFromForm() {
     }
     return xArrayChecked;
 }
+
+function getRFromForm() {
+    let rArray = document.getElementsByClassName("r");
+    let r;
+    for (let i = 0; i < rArray.length; i++) {
+        let elR = rArray[i];
+        if (elR.checked) {
+            r = i + 1;
+            break;
+        }
+    }
+    return r;
+}
+
+function checkY(y) {
+    let elY = document.getElementById("y")
+    elY.setCustomValidity("");
+    let isYValid = true;
+    if (y === '') {
+        elY.setCustomValidity("Введите Y.");
+        isYValid = false;
+    } else if (/[^0-9,.+-]/.test(y)) {
+        elY.setCustomValidity("В поле Y должны быть введенны цифры.");
+        isYValid = false;
+    } else if (!/^(\+?(([0-4]([.,]\d+)?)|5([.,]0+)?))$|(-(([0-2]([.,]\d+)?)|(3([,.]0+)?)))$/.test(y)) {
+        elY.setCustomValidity("В Y введено значение, не входящие в интервал (-5; 3). ");
+        isYValid = false;
+    }
+    return isYValid;
+}
+
+function checkX() {
+    let elX = document.getElementById("x1");
+    elX.setCustomValidity("");
+    let isXValid = true;
+    if (!xSelected()) {
+        elX.setCustomValidity("Выберите X.");
+        isXValid = false;
+    }
+    return isXValid;
+}
+
+function xSelected() {
+    let first = document.getElementById("x1");
+    let second = document.getElementById("x2");
+    let third = document.getElementById("x3");
+    let forth = document.getElementById("x4");
+    let fifth = document.getElementById("x5");
+    let sixth = document.getElementById("x6");
+    let seventh = document.getElementById("x7");
+    return first.checked || second.checked || third.checked || forth.checked || fifth.checked || sixth.checked || seventh.checked;
+
+}
+
+function getUrlVars() {
+    let vars = {};
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
+function request(x, y, r) {
+    saveSession(x, y, r);
+    // $.ajax({
+    //     type: 'get',
+    //     url: 'control',
+    //     data: {x, y, r},
+    //     response: 'text'
+    // }).done((data) => {
+    //     document.getElementById("response").innerHTML = data;
+    // }).fail((error) => {
+    //     //alert("Error: " + error.message);
+    // });
+
+    passToJSFManagedBean(
+        [
+            {
+                name: "x",
+                value: x
+            },
+            {
+                name: "y",
+                value: y
+            },
+            {
+                name: "r",
+                value: r
+            }
+        ]
+    );
+}
+
+// Обработка данных при клике на график
 
 function clickOnArea() {
     let canvas = document.getElementById("canvas");
@@ -81,30 +180,16 @@ function drawPoint(context, x, y, r) {
 
 function isInArea(x, y, r) {
     let isInArea = false;
-    if ((x >= 0 && y <= 0) && (x <= r && y >= -r)) {
+    if ((x <= 0 && y <= 0) && (x >=(-r/2) && y >= -r)) {
         isInArea = true;
-    } else if ((x <= 0 && y <= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= (Math.pow(r, 2)))) {
+    } else if ((x >= 0 && y <= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= (Math.pow(r, 2)))) {
         isInArea = true;
-    } else if ((y >= 0 && x >= 0) && (y <= (-x + r / 2))) {
+    } else if ((y >= 0 && x <= 0) && (y <= (x + r / 2))) {
         isInArea = true;
     }
     return isInArea;
 }
 
-function request(x, y, r) {
-    saveSession(x, y, r);
-    $.ajax({
-        type: 'get',
-        url: 'control',
-        data: {x, y, r},
-        response: 'text'
-    }).done((data) => {
-        document.getElementById("response").innerHTML = data;
-    }).fail((error) => {
-        //alert("Error: " + error.message);
-    });
-
-}
 
 function saveSession(x, y, r) {
     let point = {
@@ -125,40 +210,7 @@ function saveSession(x, y, r) {
 }
 
 
-function checkX(x) {
-    elX.setCustomValidity("");
-    let isXValid = true;
-    if (x === '') {
-        elX.setCustomValidity("Введите Х.");
-        isXValid = false;
-    } else if (/[^0-9,.+-]/.test(x)) {
-        elX.setCustomValidity("В поле Х должны быть введенны цифры.");
-        isXValid = false;
-    } else if (!/^(\+?(([0-4]([.,]\d+)?)|5([.,]0+)?))$|(-(([0-4]([.,]\d+)?)|(5([,.]0+)?)))$/.test(x)) {
-        elX.setCustomValidity("В Х введено значение, не входящие в интервал (-5; 5). ");
-        isXValid = false;
-    }
-    return isXValid;
-}
 
-function checkY(y) {
-    let elY = document.getElementById("x1");
-    elY.setCustomValidity("");
-    let isYValid = true;
-    if (!ySelected()) {
-        elY.setCustomValidity("Выберите Y.");
-        isYValid = false;
-    }
-    return isYValid;
-}
-
-function getUrlVars() {
-    let vars = {};
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-        vars[key] = value;
-    });
-    return vars;
-}
 
 
 function drawCanvas(R){
@@ -184,7 +236,7 @@ function drawCanvas(R){
     ctx.fill();
 
     //Quadrant
-    ctx.arc(150, 150, 120, 0, 0.5*Math.PI, false);
+    ctx.arc(150, 150, 120, 0, 0.5 * Math.PI, false);
 
     //Rectangle
     ctx.lineTo(90, 270);
@@ -224,27 +276,53 @@ function drawCanvas(R){
     ctx.lineTo(155, 270);
     ctx.stroke();
 
-    //Signatures on the chart
-    if (R === undefined){
-        ctx.strokeText("-R/2", 90, 140, 20);
-        ctx.strokeText("-R", 30, 140, 20);
-        ctx.strokeText("R/2", 210, 140, 20);
-        ctx.strokeText("R", 270, 140, 20);
-        ctx.strokeText("R", 160, 33, 20);
-        ctx.strokeText("R/2", 160, 93, 20);
-        ctx.strokeText("-R/2", 160, 213, 20);
-        ctx.strokeText("-R", 160, 273, 20);
-    } else {
-        ctx.strokeText(`-${R / 2}`, 90, 140, 20);
-        ctx.strokeText(`-${R}`, 30, 140, 20);
-        ctx.strokeText(`${R / 2}`, 210, 140, 20);
-        ctx.strokeText(R, 270, 140, 20);
-        ctx.strokeText(R, 160, 33, 20);
-        ctx.strokeText(`${R / 2}`, 160, 93, 20);
-        ctx.strokeText(`-${R / 2}`, 160, 213, 20);
-        ctx.strokeText(`-${R}`, 160, 273, 20);
-        ctx.strokeText("x", 290, 140, 20);
-        ctx.strokeText("y", 160, 10, 20);
-    }
+    ctx.strokeText(`-${R / 2}`, 90, 140, 20);
+    ctx.strokeText(`-${R}`, 30, 140, 20);
+    ctx.strokeText(`${R / 2}`, 210, 140, 20);
+    ctx.strokeText(R, 270, 140, 20);
+    ctx.strokeText(R, 160, 33, 20);
+    ctx.strokeText(`${R / 2}`, 160, 93, 20);
+    ctx.strokeText(`-${R / 2}`, 160, 213, 20);
+    ctx.strokeText(`-${R}`, 160, 273, 20);
+    ctx.strokeText("x", 290, 140, 20);
+    ctx.strokeText("y", 160, 10, 20);
+
     ctx.closePath();
+}
+
+
+function changeRadius(clickedElement) {
+    const rElems = document.getElementsByClassName("r");
+    for (let el of rElems) {
+        if (clickedElement.checked && !el.checked) {
+            el.disabled = true;
+        }
+
+        if (!clickedElement.checked) {
+            el.disabled = false;
+        }
+    }
+
+    if (clickedElement.checked) {
+        drawCanvas(getRFromForm());
+    }
+}
+
+function renderRadius() {
+    const rElems = document.getElementsByClassName("r");
+    let hasChecked = false;
+    for (let el of rElems) {
+        if (el.checked) {
+            hasChecked = true;
+            break;
+        }
+    }
+    if (hasChecked) {
+        for (let el of rElems) {
+            if (!el.checked) {
+                el.disabled = true;
+            }
+        }
+    }
+
 }

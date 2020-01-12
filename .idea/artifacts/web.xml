@@ -13,6 +13,7 @@
           <element id="library" level="project" name="javax.faces-2.4.0" />
           <element id="library" level="project" name="postgresql-42.2.8" />
           <element id="library" level="project" name="primefaces-7.0" />
+          <element id="library" level="project" name="com.googlecode.wicket-jquery-ui:jquery-ui-core:1.1" />
         </element>
       </element>
     </root>

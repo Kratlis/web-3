@@ -1,13 +1,13 @@
 package classes;
 
-import classes.db.ConnectionDB;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
 
 @ManagedBean
 @RequestScoped
@@ -64,6 +64,16 @@ public class Bean {
         if (x6) {
             points.addFirst(new Point(2, y, r, new Date()));
         }
+    }
+
+    public void addPointFromCanvas() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
+        double x = Double.parseDouble(params.get("x"));
+        double y = Double.parseDouble(params.get("y"));
+        int r = Integer.parseInt(params.get("r"));
+
+        System.out.println(x + " " + y + " " + r);
     }
 
     private void defineR() {

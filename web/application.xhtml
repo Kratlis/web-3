@@ -3,14 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ace="http://java.sun.com/jsf/html">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputScript name="script.js"/>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 </h:head>
-<h:body onload="drawCanvas()">
+<h:body onload="drawCanvas(2)">
+
+    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{bean.addPointFromCanvas}" process="@this" />
     <div>
         <h:form id="plot">
             <h:inputHidden id="xCanvas" value="#{canvasBean.x}">
@@ -23,45 +27,45 @@
         </h:form>
     </div>
     <div>
-        <h:form id="form" onsubmit="return check();">
+        <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
             X:
-            <h:selectBooleanCheckbox id="x1" value="#{bean.x1}">
+            <h:selectBooleanCheckbox id="x1" class="x" value="#{bean.x1}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x1">
                 <h:outputText value="-4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x2" value="#{bean.x2}">
+            <h:selectBooleanCheckbox id="x2" class="x" value="#{bean.x2}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x2">
                 <h:outputText value="-3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x3" value="#{bean.x3}">
+            <h:selectBooleanCheckbox id="x3" class="x" value="#{bean.x3}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x3">
                 <h:outputText value="-2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x4" value="#{bean.x4}">
+            <h:selectBooleanCheckbox id="x4" class="x" value="#{bean.x4}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x4">
                 <h:outputText value="-1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x5" value="#{bean.x5}">
+            <h:selectBooleanCheckbox id="x5" class="x" value="#{bean.x5}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x5">
                 <h:outputText value="0"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x6" value="#{bean.x6}">
+            <h:selectBooleanCheckbox id="x6" class="x" value="#{bean.x6}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x6">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="x7" value="#{bean.x7}">
+            <h:selectBooleanCheckbox id="x7" class="x" value="#{bean.x7}">
                 <f:validator validatorId="xValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="x7">
@@ -85,31 +89,31 @@
             <h:message id="yError" for="y" style="color:red"/>
 
             R:
-            <h:selectBooleanCheckbox id="r1" value="#{bean.r1}">
+            <h:selectBooleanCheckbox id="r1" class="r" value="#{bean.r1}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="r1">
                 <h:outputText value="1"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r2" value="#{bean.r2}">
+            <h:selectBooleanCheckbox id="r2" class="r" value="#{bean.r2}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="r2">
                 <h:outputText value="2"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r3" value="#{bean.r3}">
+            <h:selectBooleanCheckbox id="r3" class="r" value="#{bean.r3}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="r3">
                 <h:outputText value="3"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r4" value="#{bean.r4}">
+            <h:selectBooleanCheckbox id="r4" class="r" value="#{bean.r4}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="r4">
                 <h:outputText value="4"/>
             </h:outputLabel>
-            <h:selectBooleanCheckbox id="r5" value="#{bean.r5}">
+            <h:selectBooleanCheckbox id="r5" class="r" value="#{bean.r5}" onclick="changeRadius(this)">
                 <f:validator validatorId="rValidator"/>
             </h:selectBooleanCheckbox>
             <h:outputLabel for="r5">

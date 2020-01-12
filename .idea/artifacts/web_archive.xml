@@ -3,6 +3,11 @@
     <output-path>$PROJECT_DIR$/out/web_archive</output-path>
     <root id="archive" name="web_archive.war">
       <element id="artifact" artifact-name="web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="com.googlecode.wicket-jquery-ui:jquery-ui-core:1.1" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

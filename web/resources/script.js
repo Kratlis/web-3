@@ -13,7 +13,6 @@ function getDataAndDrawPoint() {
         }
 
         drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
-        //saveSession(x, y, r);
         request(x, y, r);
         return true;
     } else {
@@ -32,9 +31,8 @@ function getDataAndDrawPoint() {
         for (let x of xArray) {
             drawPoint(document.getElementById("canvas").getContext('2d'), 120 * x / r + 150, 150 - 120 * y, r);
             saveSession(x, y, r);
-            //request(x, y, r);
-            return true;
         }
+        return true;
     }
 }
 
@@ -48,11 +46,14 @@ function getYFromForm() {
 function getXFromForm() {
     let xArray = document.getElementsByClassName("x");
     let xArrayChecked = [];
+    let i = -5;
     for (let elX of xArray) {
+        i++;
         if (elX.checked) {
-            xArrayChecked.push(elX);
+            xArrayChecked.push(i);
         }
     }
+
     return xArrayChecked;
 }
 
@@ -169,7 +170,7 @@ function drawPoint(context, x, y, r) {
 
 function isInArea(x, y, r) {
     let isInArea = false;
-    if ((x <= 0 && y <= 0) && (x >=(-r/2) && y >= -r)) {
+    if ((x <= 0 && y <= 0) && (x >= (-r / 2) && y >= -r)) {
         isInArea = true;
     } else if ((x >= 0 && y <= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= (Math.pow(r, 2)))) {
         isInArea = true;
@@ -204,15 +205,13 @@ function initPoints(r) {
     if (pointsStr != null) {
         points = JSON.parse(pointsStr);
         for (let point of points) {
-            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, r);
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, getRFromForm());
         }
     }
 }
 
 
-
-
-function drawCanvas(R){
+function drawCanvas(R) {
     let canvas, ctx;
     try {
         canvas = document.getElementById("canvas");

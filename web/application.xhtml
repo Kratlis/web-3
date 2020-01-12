@@ -123,7 +123,7 @@
             <h:message for="r5" style="color:red"/>
 
             <div>
-                <h:commandButton value="Проверить" action="#{bean.executeForm}">
+                <h:commandButton value="Проверить" action="#{bean.executeForm}" onclick="getDataAndDrawPoint()">
                     <f:ajax execute="@form" render="@form"/>
                     <f:ajax immediate="true" render="results"/>
                 </h:commandButton>

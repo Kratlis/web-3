@@ -66,15 +66,6 @@ public class Bean {
         }
     }
 
-    public void addPointFromCanvas() {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-
-        double x = Double.parseDouble(params.get("x"));
-        double y = Double.parseDouble(params.get("y"));
-        int r = Integer.parseInt(params.get("r"));
-
-        System.out.println(x + " " + y + " " + r);
-    }
 
     private void defineR() {
         r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;

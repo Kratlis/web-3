@@ -120,17 +120,6 @@ function getUrlVars() {
 
 function request(x, y, r) {
     saveSession(x, y, r);
-    // $.ajax({
-    //     type: 'get',
-    //     url: 'control',
-    //     data: {x, y, r},
-    //     response: 'text'
-    // }).done((data) => {
-    //     document.getElementById("response").innerHTML = data;
-    // }).fail((error) => {
-    //     //alert("Error: " + error.message);
-    // });
-
     passToJSFManagedBean(
         [
             {
@@ -209,6 +198,16 @@ function saveSession(x, y, r) {
     sessionStorage.setItem("points", JSON.stringify(points));
 }
 
+function initPoints() {
+    let points = [];
+    let pointsStr = sessionStorage.getItem("points");
+    if (pointsStr != null) {
+        points = JSON.parse(pointsStr);
+        for (let point of points) {
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, rad);
+        }
+    }
+}
 
 
 
@@ -288,6 +287,8 @@ function drawCanvas(R){
     ctx.strokeText("y", 160, 10, 20);
 
     ctx.closePath();
+
+    initPoints();
 }
 
 

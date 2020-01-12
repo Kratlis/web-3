@@ -14,14 +14,11 @@
 </h:head>
 <h:body onload="drawCanvas(2)">
 
-    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{bean.addPointFromCanvas}" process="@this" />
+    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" />
     <div>
         <h:form id="plot">
-            <h:inputHidden id="xCanvas" value="#{canvasBean.x}">
-            </h:inputHidden>
-            <h:inputHidden id="yCanvas" value="#{canvasBean.y}">
-            </h:inputHidden>
-            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
+            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()">
+            </canvas>
             <p:remoteCommand name="addPoint" action="#{canvasBean.addPoint}" update=":results"/>
         </h:form>
     </div>

@@ -2,29 +2,39 @@ package classes;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
 
 @ManagedBean
 public class CanvasBean {
 
-    @ManagedProperty(value = "#{bean}")
-    private Bean bean;
 
     @ManagedProperty(value = "#{manager}")
     private ManagerDB manager;
 
     private LinkedList<Point> points = new LinkedList<>();
 
-    private double x;
-    private double y;
-
     public CanvasBean() {
     }
 
-    public void addPoint() throws SQLException {
-        int r = bean.getR();
+    public void addPointFromCanvas() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
+        double x = Double.parseDouble(params.get("x"));
+        double y = Double.parseDouble(params.get("y"));
+        int r = Integer.parseInt(params.get("r"));
+
+        try {
+            addPoint(x, y, r);
+        } catch (SQLException e) {
+            System.out.println("Ошибка при записи в БД.");
+        }
+    }
+
+    public void addPoint(double x, double y, int r) throws SQLException {
         Point point = new Point(x, y, r, new Date());
         manager.insertPointToDB(point);
         points = manager.extractPointsFromDB();
@@ -37,30 +47,6 @@ public class CanvasBean {
 
     public void setManager(ManagerDB manager) {
         this.manager = manager;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public Bean getBean() {
-        return bean;
-    }
-
-    public void setBean(Bean bean) {
-        this.bean = bean;
     }
 
     public LinkedList<Point> getPoints() {

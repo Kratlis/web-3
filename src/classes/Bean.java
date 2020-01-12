@@ -16,7 +16,7 @@ public class Bean {
     @ManagedProperty(value = "#{manager}")
     private ManagerDB manager;
 
-    private LinkedList<Point> points = new LinkedList<>();
+    public LinkedList<Point> points = new LinkedList<>();
     private boolean x1 = false;
     private boolean x2 = false;
     private boolean x3 = false;

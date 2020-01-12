@@ -14,7 +14,7 @@
 </h:head>
 <h:body onload="drawCanvas(2)">
 
-    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" />
+    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" update=":results"/>
     <div>
             <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
     </div>
@@ -120,7 +120,7 @@
             <h:message for="r5" style="color:red"/>
 
             <div>
-                <h:commandButton value="Проверить" action="#{bean.executeForm}">
+                <h:commandButton value="Проверить" action="#{bean.executeForm}" onclick="getDataAndDrawPoint()">
                     <f:ajax execute="@form" render="@form"/>
                     <f:ajax immediate="true" render="results"/>
                 </h:commandButton>

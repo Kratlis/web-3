@@ -15,15 +15,15 @@ public class ConnectionDB {
     public ConnectionDB() {
         try {
             connect();
-            System.out.println("Соединение успешно установлено! ");//Сообщение о подключении
+            System.out.println("Database connection successfully established.");//Сообщение о подключении
         } catch (Exception e) {
-            System.out.println("Cannot connect to database!");
+            System.out.println("Cannot connect to database.");
         }
     }
 
     public void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver"); //Подключаем драйвер
-        System.out.println("Драйвер загружен!");//Выводим сообщение
+        System.out.println("Driver loaded!");//Выводим сообщение
         connection = DriverManager.getConnection(url, name, pass);//Устанавливаем соединение
     }
 

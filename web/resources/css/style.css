@@ -22,3 +22,24 @@ header p {
     float: left;
     width: 50%;
 }
+
+.accept{
+    background:linear-gradient(to bottom, #FFFFFF, #E6E6E6) #F5F5F5 repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    text-decoration:none;
+    display:block;
+    font-size: 14px;
+    width:120px;
+    line-height: 20px;
+    margin: 20px auto;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    position: relative;
+
+}

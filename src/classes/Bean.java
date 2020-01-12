@@ -37,8 +37,10 @@ public class Bean {
 
     public void executeForm() throws SQLException {
         if (rChosen()){
+            System.out.println( "XXXX: " + x1 + " " + x2 + " " + x3 + " " + x4 + " " + x5 + " " + x6 + " " + x7);
             defineR();
             fillPointsList();
+            System.out.println(points);
             manager.insertPointsToDB(points);
         }
         points = manager.extractPointsFromDB();
@@ -63,7 +65,7 @@ public class Bean {
         if (x6) {
             points.addFirst(new Point(1, y, r, new Date()));
         }
-        if (x6) {
+        if (x7) {
             points.addFirst(new Point(2, y, r, new Date()));
         }
     }

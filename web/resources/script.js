@@ -146,6 +146,9 @@ function request(x, y, r) {
 // Обработка данных при клике на график
 function clickOnArea() {
     let canvas = document.getElementById("canvas");
+    let startX = canvas.height / 2;
+    let startY = canvas.width / 2;
+    let R = sessionStorage.getItem("radiusValue");
     let boundRect = canvas.getBoundingClientRect();
     let left = boundRect.left;
     let top = boundRect.top;
@@ -155,11 +158,16 @@ function clickOnArea() {
     let y = event.clientY - top;
     let r = 2;
     drawPoint(canvas.getContext('2d'), x, y, r);
-    request((x - 150) / 120 * r, (150 - y) / 120 * r, r);
+    request((x - startX) / 150 * r, (startY - y) / 150 * r, r);
 }
 
 function drawPoint(context, x, y, r) {
-    if (!isInArea((x - 150) / 120 * r, (150 - y) / 120 * r, r)) {
+    let canvas = document.getElementById("canvas");
+    let startX = canvas.height / 2;
+    let startY = canvas.width / 2;
+    let R = sessionStorage.getItem("radiusValue");
+
+    if (!isInArea((x - startX) / 150 * 5, (startY - y) / 150 * 5, r)) {
         context.fillStyle = "red";
     } else {
         context.fillStyle = "green";
@@ -172,6 +180,7 @@ function drawPoint(context, x, y, r) {
 }
 
 function isInArea(x, y, r) {
+    r = sessionStorage.getItem("radiusValue");
     let isInArea = false;
     if ((x <= 0 && y <= 0) && (x >= (-r / 2) && y >= -r)) {
         isInArea = true;
@@ -207,7 +216,7 @@ function initPoints(R) {
     if (pointsStr != null) {
         points = JSON.parse(pointsStr);
         for (let point of points) {
-            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, sessionStorage.getItem("radiusValue"));
+            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, point.r);
         }
     }
 }
@@ -223,71 +232,120 @@ function drawCanvas(R) {
             "<br><br><img src='area.jpg' alt='Область' width='420' height='380'>";
         return;
     }
-    canvas.height = 300;
-    canvas.width = 300;
+    let size = 360;
+    canvas.height = size;
+    canvas.width = size;
+    //Single segment
+    let i = (canvas.width / 2 - 30) / 5;
+    R = R * i;
+    let startX = canvas.height / 2;
+    let startY = canvas.width / 2;
     ctx.fillStyle = '#3355ff';
     ctx.beginPath();
 
     //Triangle
-    ctx.moveTo(150, 90);
-    ctx.lineTo(90, 150);
-    ctx.lineTo(150, 150);
+    ctx.moveTo(startX, startY - R / 2);
+    ctx.lineTo(startX - R / 2, startY);
+    ctx.lineTo(startX, startY);
     ctx.fill();
 
     //Quadrant
-    ctx.arc(150, 150, 120, 0, 0.5 * Math.PI, false);
+    ctx.arc(startX, startY, R, 0, 0.5 * Math.PI, false);
 
     //Rectangle
-    ctx.lineTo(90, 270);
-    ctx.lineTo(90, 150);
-    // ctx.lineTo(150, 270);
+    ctx.lineTo(startX - R / 2, startY + R);
+    ctx.lineTo(startX - R / 2, startY);
     ctx.fill();
 
     //Lines
     ctx.strokeStyle = '#000000'; // colour of the lines
-    ctx.strokeRect(150, 0, 0, 300); // y axis
-    ctx.strokeRect(0, 150, 300, 0); // x axis
+    ctx.strokeRect(startX, 0, 0, canvas.height); // y axis
+    ctx.strokeRect(0, startY, canvas.width, 0); // x axis
 
-    //Strokes
-    ctx.moveTo(150, 0);
-    ctx.lineTo(146, 10);
-    ctx.moveTo(150, 0);
-    ctx.lineTo(154, 10);
-    ctx.moveTo(300, 150);
-    ctx.lineTo(290, 146);
-    ctx.moveTo(300, 150);
-    ctx.lineTo(290, 154);
-    ctx.moveTo(30, 145);
-    ctx.lineTo(30, 155);
-    ctx.moveTo(90, 145);
-    ctx.lineTo(90, 155);
-    ctx.moveTo(210, 145);
-    ctx.lineTo(210, 155);
-    ctx.moveTo(270, 145);
-    ctx.lineTo(270, 155);
-    ctx.moveTo(145, 30);
-    ctx.lineTo(155, 30);
-    ctx.moveTo(145, 90);
-    ctx.lineTo(155, 90);
-    ctx.moveTo(145, 210);
-    ctx.lineTo(155, 210);
-    ctx.moveTo(145, 270);
-    ctx.lineTo(155, 270);
+    //Axes' arrows
+    ctx.moveTo(startX, 0);
+    ctx.lineTo(startX - 4, 10);
+    ctx.moveTo(startX, 0);
+    ctx.lineTo(startX + 4, 10);
+    ctx.moveTo(canvas.width, startY);
+    ctx.lineTo(canvas.width - 10, startY - 4);
+    ctx.moveTo(canvas.width, startY);
+    ctx.lineTo(canvas.width - 10, startY + 4);
+
+    //X axe strokes
+    ctx.moveTo(startX - i * 5, startY - 5);
+    ctx.lineTo(startX - i * 5, startY + 5);
+    ctx.moveTo(startX - i * 4, startY - 5);
+    ctx.lineTo(startX - i * 4, startY + 5);
+    ctx.moveTo(startX - i * 3, startY - 5);
+    ctx.lineTo(startX - i * 3, startY + 5);
+    ctx.moveTo(startX - i * 2, startY - 5);
+    ctx.lineTo(startX - i * 2, startY + 5);
+    ctx.moveTo(startX - i, startY - 5);
+    ctx.lineTo(startX - i, startY + 5);
+    ctx.moveTo(startX + i, startY - 5);
+    ctx.lineTo(startX + i, startY + 5);
+    ctx.moveTo(startX + i * 2, startY - 5);
+    ctx.lineTo(startX + i * 2, startY + 5);
+    ctx.moveTo(startX + i * 3, startY - 5);
+    ctx.lineTo(startX + i * 3, startY + 5);
+    ctx.moveTo(startX + i * 4, startY - 5);
+    ctx.lineTo(startX + i * 4, startY + 5);
+    ctx.moveTo(startX + i * 5, startY - 5);
+    ctx.lineTo(startX + i * 5, startY + 5);
+
+
+    //Y axe strokes
+    ctx.moveTo(startX - 5, startY - i * 5);
+    ctx.lineTo(startX + 5, startY - i * 5);
+    ctx.moveTo(startX - 5, startY - i * 4);
+    ctx.lineTo(startX + 5, startY - i * 4);
+    ctx.moveTo(startX - 5, startY - i * 3);
+    ctx.lineTo(startX + 5, startY - i * 3);
+    ctx.moveTo(startX - 5, startY - i * 2);
+    ctx.lineTo(startX + 5, startY - i * 2);
+    ctx.moveTo(startX - 5, startY - i);
+    ctx.lineTo(startX + 5, startY - i);
+    ctx.moveTo(startX - 5, startY + i);
+    ctx.lineTo(startX + 5, startY + i);
+    ctx.moveTo(startX - 5, startY + i * 2);
+    ctx.lineTo(startX + 5, startY + i * 2);
+    ctx.moveTo(startX - 5, startY + i * 3);
+    ctx.lineTo(startX + 5, startY + i * 3);
+    ctx.moveTo(startX - 5, startY + i * 4);
+    ctx.lineTo(startX + 5, startY + i * 4);
+    ctx.moveTo(startX - 5, startY + i * 5);
+    ctx.lineTo(startX + 5, startY + i * 5);
+
     ctx.stroke();
 
-    ctx.strokeText(`-${R / 2}`, 90, 140, 20);
-    ctx.strokeText(`-${R}`, 30, 140, 20);
-    ctx.strokeText(`${R / 2}`, 210, 140, 20);
-    ctx.strokeText(R, 270, 140, 20);
-    ctx.strokeText(R, 160, 33, 20);
-    ctx.strokeText(`${R / 2}`, 160, 93, 20);
-    ctx.strokeText(`-${R / 2}`, 160, 213, 20);
-    ctx.strokeText(`-${R}`, 160, 273, 20);
-    ctx.strokeText("x", 290, 140, 20);
-    ctx.strokeText("y", 160, 10, 20);
+    //Signatures
+    ctx.strokeText('-5', startX - i * 5, startY - 10, 20);
+    ctx.strokeText('-4', startX - i * 4, startY - 10, 20);
+    ctx.strokeText('-3', startX - i * 3, startY - 10, 20);
+    ctx.strokeText('-2', startX - i * 2, startY - 10, 20);
+    ctx.strokeText('-1', startX - i, startY - 10, 20);
+    ctx.strokeText('1', startX + i, startY - 10, 20);
+    ctx.strokeText('2', startX + i * 2, startY - 10, 20);
+    ctx.strokeText('3', startX + i * 3, startY - 10, 20);
+    ctx.strokeText('4', startX + i * 4, startY - 10, 20);
+    ctx.strokeText('5', startX + i * 5, startY - 10, 20);
+    ctx.strokeText('-5', startX + 10, startY + i * 5, 20);
+    ctx.strokeText('-4', startX + 10, startY + i * 4, 20);
+    ctx.strokeText('-3', startX + 10, startY + i * 3, 20);
+    ctx.strokeText('-2', startX + 10, startY + i * 2, 20);
+    ctx.strokeText('-1', startX + 10, startY + i, 20);
+    ctx.strokeText('1', startX + 10, startY - i, 20);
+    ctx.strokeText('2', startX + 10, startY - i * 2, 20);
+    ctx.strokeText('3', startX + 10, startY - i * 3, 20);
+    ctx.strokeText('4', startX + 10, startY - i * 4, 20);
+    ctx.strokeText('5', startX + 10, startY - i * 5, 20);
+    ctx.strokeText("x", canvas.width - 10, startY - 10, 20);
+    ctx.strokeText("y", startX + 10, 10, 20);
     initPoints(R);
     ctx.closePath();
 }
+
 
 function updateRadius() {
     let previousR = sessionStorage.getItem("radiusValue");
@@ -314,8 +372,9 @@ function changeRadius(clickedElement) {
     }
 
     if (clickedElement.checked) {
-        drawCanvas(getRFromForm());
         sessionStorage.setItem("radiusValue", getRFromForm());
+        drawCanvas(getRFromForm());
+        initPoints(getRFromForm());
     }
 }
 

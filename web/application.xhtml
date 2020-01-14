@@ -6,7 +6,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-    <h:outputScript name="script.js"/>
+    <h:outputScript library="js" name="script.js"/>
+    <h:outputStylesheet name="style.css" library="css"/>
     <script type="text/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript"
@@ -14,152 +15,173 @@
 </h:head>
 <h:body>
 
-    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}" process="@this" update=":results"/>
+    <p:remoteCommand name="passToJSFManagedBean" id="passToJSFManagedBeancmd" action="#{canvasBean.addPointFromCanvas}"
+                     process="@this" update=":results"/>
     <div>
-            <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
+        <canvas id="canvas" width="300" height="300" onclick="clickOnArea()"/>
     </div>
     <div>
-        <h:graphicImage  value="resources/pictures/-EmLiFwftbk.jpg" height="300" width="480"
-                         alt="внутренний мир" style="top:10px; left:500px; float: right; position: fixed;"/>
-        <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
-            <script type="text/javascript">getDataAndDrawPoint()</script>
-            <div>
-            X:
-            <h:selectBooleanCheckbox id="x1" class="x" value="#{bean.x1}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x1">
-                <h:outputText value="-4"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x2" class="x" value="#{bean.x2}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x2">
-                <h:outputText value="-3"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x3" class="x" value="#{bean.x3}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x3">
-                <h:outputText value="-2"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x4" class="x" value="#{bean.x4}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x4">
-                <h:outputText value="-1"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x5" class="x" value="#{bean.x5}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x5">
-                <h:outputText value="0"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x6" class="x" value="#{bean.x6}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x6">
-                <h:outputText value="1"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="x7" class="x" value="#{bean.x7}">
-                <f:validator validatorId="xValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="x7">
-                <h:outputText value="2"/>
-            </h:outputLabel>
+        <h:graphicImage value="resources/pictures/-EmLiFwftbk.jpg" height="300" width="480"
+                        alt="внутренний мир" style="top:10px; left:500px; float: right; position: fixed;"/>
+        <br/>
+        <div>
+            <h:form id="form" prependId="false" onsubmit="getDataAndDrawPoint()">
+                <script type="text/javascript">getDataAndDrawPoint()</script>
+                <div>
+                    X:
+                    <h:selectBooleanCheckbox id="x1" class="x" value="#{bean.x1}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x1">
+                        <h:outputText value="-4"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x2" class="x" value="#{bean.x2}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x2">
+                        <h:outputText value="-3"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x3" class="x" value="#{bean.x3}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x3">
+                        <h:outputText value="-2"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x4" class="x" value="#{bean.x4}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x4">
+                        <h:outputText value="-1"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x5" class="x" value="#{bean.x5}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x5">
+                        <h:outputText value="0"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x6" class="x" value="#{bean.x6}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x6">
+                        <h:outputText value="1"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="x7" class="x" value="#{bean.x7}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="x7">
+                        <h:outputText value="2"/>
+                    </h:outputLabel>
 
-            <h:message for="x1" style="color:red"/>
-            <h:message for="x2" style="color:red"/>
-            <h:message for="x3" style="color:red"/>
-            <h:message for="x4" style="color:red"/>
-            <h:message for="x5" style="color:red"/>
-            <h:message for="x6" style="color:red"/>
-            <h:message for="x7" style="color:red"/>
+                    <h:message for="x1" style="color:red"/>
+                    <h:message for="x2" style="color:red"/>
+                    <h:message for="x3" style="color:red"/>
+                    <h:message for="x4" style="color:red"/>
+                    <h:message for="x5" style="color:red"/>
+                    <h:message for="x6" style="color:red"/>
+                    <h:message for="x7" style="color:red"/>
+                </div>
+                <div>
+                    Y:
+                    <h:inputText a:placeholder="[-5; 3]" id="y" value="#{bean.y}" maxlength="17" autocomplete="false">
+                        <f:ajax execute="y" render="yError" event="keyup"/>
+                        <f:validator validatorId="yValidator"/>
+                        <f:converter converterId="yConverter"/>
+                    </h:inputText>
+                    <h:message id="yError" for="y" style="color:red"/>
+                </div>
+                <div>
+                    R:
+                    <h:selectBooleanCheckbox id="r1" class="r" value="#{bean.r1}" onclick="changeRadius(this)">
+                        <f:validator validatorId="rValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="r1">
+                        <h:outputText value="1"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="r2" class="r" value="#{bean.r2}" onclick="changeRadius(this)">
+                        <f:validator validatorId="rValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="r2">
+                        <h:outputText value="2"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="r3" class="r" value="#{bean.r3}" onclick="changeRadius(this)">
+                        <f:validator validatorId="rValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="r3">
+                        <h:outputText value="3"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="r4" class="r" value="#{bean.r4}" onclick="changeRadius(this)">
+                        <f:validator validatorId="rValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="r4">
+                        <h:outputText value="4"/>
+                    </h:outputLabel>
+                    <h:selectBooleanCheckbox id="r5" class="r" value="#{bean.r5}" onclick="changeRadius(this)">
+                        <f:validator validatorId="rValidator"/>
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel for="r5">
+                        <h:outputText value="5"/>
+                    </h:outputLabel>
+                    <script type="text/javascript">updateRadius()</script>
+                    <h:message for="r1" style="color:red"/>
+                    <h:message for="r2" style="color:red"/>
+                    <h:message for="r3" style="color:red"/>
+                    <h:message for="r4" style="color:red"/>
+                    <h:message for="r5" style="color:red"/>
+                </div>
+                <div>
+                    <h:commandButton value="Проверить" action="#{bean.executeForm}" onclick="getDataAndDrawPoint()">
+                        <f:ajax execute="@form" render="@form"/>
+                        <f:ajax immediate="true" render="results"/>
+                    </h:commandButton>
+                </div>
+            </h:form>
+            <br/>
+            <div style="height: 200px; overflow: auto;">
+                <h:dataTable id="results"
+                             var="p"
+                             value="#{bean.points}">
+
+                    <h:column id="columnX" headerText="X">
+                        <f:facet name="header">
+                            <h:outputText value="X"/>
+                        </f:facet>
+                        <h:outputText id="xCell" value="#{p.x}"/>
+                    </h:column>
+
+                    <h:column id="columnY">
+                        <f:facet name="header">
+                            <h:outputText value="Y"/>
+                        </f:facet>
+                        <h:outputText id="yCell" value="#{p.y}"/>
+                    </h:column>
+
+                    <h:column id="columnR">
+                        <f:facet name="header">
+                            <h:outputText value="R"/>
+                        </f:facet>
+                        <h:outputText id="rCell" value="#{p.r}"/>
+                    </h:column>
+
+                    <h:column id="columnResult">
+                        <f:facet name="header">
+                            <h:outputText value="In area"/>
+                        </f:facet>
+                        <h:outputText id="resultCell" value="#{p.inArea}"/>
+                    </h:column>
+
+                    <h:column id="columnTime">
+                        <f:facet name="header">
+                            <h:outputText value="Time"/>
+                        </f:facet>
+                        <h:outputText id="timeCell" value="#{p.time}"/>
+                    </h:column>
+                </h:dataTable>
             </div>
-            <div>
-            Y:
-            <h:inputText a:placeholder="[-5; 3]" id="y" value="#{bean.y}" maxlength="17" autocomplete="false">
-                <f:ajax execute="y" render="yError" event="keyup"/>
-                <f:validator validatorId="yValidator"/>
-                <f:converter converterId="yConverter"/>
-            </h:inputText>
-            <h:message id="yError" for="y" style="color:red"/>
-            </div>
-            <div>
-            R:
-            <h:selectBooleanCheckbox id="r1" class="r" value="#{bean.r1}" onclick="changeRadius(this)">
-                <f:validator validatorId="rValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="r1">
-                <h:outputText value="1"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="r2" class="r" value="#{bean.r2}" onclick="changeRadius(this)">
-                <f:validator validatorId="rValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="r2">
-                <h:outputText value="2"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="r3" class="r" value="#{bean.r3}" onclick="changeRadius(this)">
-                <f:validator validatorId="rValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="r3">
-                <h:outputText value="3"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="r4" class="r" value="#{bean.r4}" onclick="changeRadius(this)">
-                <f:validator validatorId="rValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="r4">
-                <h:outputText value="4"/>
-            </h:outputLabel>
-            <h:selectBooleanCheckbox id="r5" class="r" value="#{bean.r5}" onclick="changeRadius(this)">
-                <f:validator validatorId="rValidator"/>
-            </h:selectBooleanCheckbox>
-            <h:outputLabel for="r5">
-                <h:outputText value="5"/>
-            </h:outputLabel>
-            <script type="text/javascript">updateRadius()</script>
-            <h:message for="r1" style="color:red"/>
-            <h:message for="r2" style="color:red"/>
-            <h:message for="r3" style="color:red"/>
-            <h:message for="r4" style="color:red"/>
-            <h:message for="r5" style="color:red"/>
-            </div>
-            <div>
-                <h:commandButton value="Проверить" action="#{bean.executeForm}" onclick="getDataAndDrawPoint()">
-                    <f:ajax execute="@form" render="@form"/>
-                    <f:ajax immediate="true" render="results"/>
-                </h:commandButton>
-            </div>
-        </h:form>
-
-
-
-        <div style="height: 200px; overflow: auto;">
-            <h:dataTable id="results"
-                         var="p"
-                         value="#{bean.points}">
-
-                <h:column id="columnX" headerText="X">
-                    <h:outputText id="xCell" value="#{p.x}"/>
-                </h:column>
-
-                <h:column id="columnY" headerText="Y">
-                    <h:outputText id="yCell" value="#{p.y}"/>
-                </h:column>
-
-                <h:column id="columnR" headerText="R">
-                    <h:outputText id="rCell" value="#{p.r}"/>
-                </h:column>
-
-                <h:column id="columnResult" headerText="RESULT">
-                    <h:outputText id="resultCell" value="#{p.inArea}"/>
-                </h:column>
-            </h:dataTable>
         </div>
-
-        <h:form>
-            <h:commandLink value="Назад" action="start"/>
-        </h:form>
     </div>
+    <br/>
+    <h:form>
+        <h:commandButton value="Назад" action="start"/>
+    </h:form>
 </h:body>
 </html>

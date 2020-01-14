@@ -158,7 +158,7 @@ function clickOnArea() {
     let y = event.clientY - top;
     let r = sessionStorage.getItem("radiusValue");
     drawPoint(canvas.getContext('2d'), x, y, r);
-    request((x - startX) / 150 * 5, (startY - y) / 150 * 5, r);
+    request((x - startX) / 30, (startY - y) / 30, r);
 }
 
 function drawPoint(context, x, y, r) {
@@ -210,13 +210,13 @@ function saveSession(x, y, r) {
     sessionStorage.setItem("points", JSON.stringify(points));
 }
 
-function initPoints(R) {
+function initPoints() {
     let points = [];
     let pointsStr = sessionStorage.getItem("points");
     if (pointsStr != null) {
         points = JSON.parse(pointsStr);
         for (let point of points) {
-            drawPoint(document.getElementById("canvas").getContext('2d'), 120 * point.x / point.r + 150, 150 - 120 * point.y / point.r, point.r);
+            drawPoint(document.getElementById("canvas").getContext('2d'), 30 * point.x + 180, 180 - 30 * point.y, point.r);
         }
     }
 }
@@ -374,7 +374,7 @@ function changeRadius(clickedElement) {
     if (clickedElement.checked) {
         sessionStorage.setItem("radiusValue", getRFromForm());
         drawCanvas(getRFromForm());
-        initPoints(getRFromForm());
+        initPoints();
     }
 }
 

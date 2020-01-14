@@ -3,11 +3,9 @@ package classes;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.Map;
 
 @ManagedBean
 @RequestScoped
@@ -36,36 +34,39 @@ public class Bean {
     }
 
     public void executeForm() throws SQLException {
-        if (rChosen()){
+        if (rChosen()) {
             defineR();
-            fillPointsList();
-            manager.insertPointsToDB(points);
+            LinkedList<Point> newPoints = getNewPoints();
+            manager.insertPointsToDB(newPoints);
         }
         points = manager.extractPointsFromDB();
     }
 
-    private void fillPointsList() {
+    private LinkedList<Point> getNewPoints() {
+        LinkedList<Point> newPoints = new LinkedList<>();
         if (x1) {
-            points.addFirst(new Point(-4, y, r, new Date()));
+            newPoints.addFirst(new Point(-4, y, r, new Date()));
         }
         if (x2) {
-            points.addFirst(new Point(-3, y, r, new Date()));
+            newPoints.addFirst(new Point(-3, y, r, new Date()));
         }
         if (x3) {
-            points.addFirst(new Point(-2, y, r, new Date()));
+            newPoints.addFirst(new Point(-2, y, r, new Date()));
         }
         if (x4) {
-            points.addFirst(new Point(-1, y, r, new Date()));
+            newPoints.addFirst(new Point(-1, y, r, new Date()));
         }
         if (x5) {
-            points.addFirst(new Point(0, y, r, new Date()));
+            newPoints.addFirst(new Point(0, y, r, new Date()));
         }
         if (x6) {
-            points.addFirst(new Point(1, y, r, new Date()));
+            newPoints.addFirst(new Point(1, y, r, new Date()));
         }
         if (x7) {
-            points.addFirst(new Point(2, y, r, new Date()));
+            newPoints.addFirst(new Point(2, y, r, new Date()));
         }
+
+        return newPoints;
     }
 
 
@@ -73,7 +74,7 @@ public class Bean {
         r = r1 ? 1 : r2 ? 2 : r3 ? 3 : r4 ? 4 : 5;
     }
 
-    private boolean rChosen(){
+    private boolean rChosen() {
         return r1 || r2 || r3 || r4 || r5;
     }
 

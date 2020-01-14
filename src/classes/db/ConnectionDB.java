@@ -3,14 +3,12 @@ package classes.db;
 import classes.Point;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class ConnectionDB {
     private Connection connection;
-    private String url = "jdbc:postgresql://localhost:5436/lab3";
-    private String name = "postgres";
-    private String pass = "123456";
+    private String url = "jdbc:postgresql://pg:5432/studs";
+    private String name = "s278172";
+    private String pass = "adl403";
 
     public ConnectionDB() {
         try {

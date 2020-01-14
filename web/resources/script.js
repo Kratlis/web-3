@@ -77,7 +77,7 @@ function getRadiusElementByValue(rValue) {
 
 function checkY(y) {
     let elY = document.getElementById("y");
-    elY.setCustomValidity("");
+    //elY.setCustomValidity("");
     let isYValid = true;
     if (y === '') {
         elY.setCustomValidity("Введите Y.");

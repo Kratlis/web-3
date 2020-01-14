@@ -14,7 +14,7 @@ public class ExtractInfoFromDB {
 
     public LinkedList<Point> extractPointsList(String sessionID) throws SQLException {
         LinkedList<Point> list = new LinkedList<>();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from points where session_id = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from s278172.points where session_id = ?");
         preparedStatement.setString(1, sessionID);
         ResultSet pointFinder = preparedStatement.executeQuery();
         while (pointFinder.next()) {

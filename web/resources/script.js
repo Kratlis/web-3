@@ -156,9 +156,9 @@ function clickOnArea() {
     let event = window.event;
     let x = event.clientX - left;
     let y = event.clientY - top;
-    let r = 2;
+    let r = sessionStorage.getItem("radiusValue");
     drawPoint(canvas.getContext('2d'), x, y, r);
-    request((x - startX) / 150 * r, (startY - y) / 150 * r, r);
+    request((x - startX) / 150 * 5, (startY - y) / 150 * 5, r);
 }
 
 function drawPoint(context, x, y, r) {

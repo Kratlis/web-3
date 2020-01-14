@@ -1,0 +1,53 @@
+body {
+    background-color: black;
+}
+
+header p {
+    font-size: 18px;
+    line-height: 10px;
+    font-family: "Andale Mono", monospace;
+}
+
+#clock {
+    color: brown;
+    text-align: right;
+    font-family: "Comic Sans MS", serif;
+    font-size: 20px;
+    /*margin-top: 30px;*/
+    padding: 30px;
+}
+
+.child {
+    height: 100px;
+    float: left;
+    width: 50%;
+}
+
+.accept {
+    background: linear-gradient(to bottom, #FFFFFF, #E6E6E6) #F5F5F5 repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    width: 120px;
+    line-height: 20px;
+    margin: 20px auto;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    position: relative;
+}
+
+.accept:hover {
+    background: #E6E6E6;
+}
+
+.accept:active {
+    background: #B3B3B3;
+    box-shadow: 0 3px #B3B3B3 inset;
+}
